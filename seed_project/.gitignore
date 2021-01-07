@@ -1,0 +1,7 @@
+**/.terraform
+**/.tfstate
+**/*.cert
+**/*.key
+**/*.pem
+key*
+**/*.tfvars

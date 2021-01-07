@@ -1,0 +1,61 @@
+authorize:
+    serviceAccount:
+      annotations:
+        iam.gke.io/gcp-service-account: pomerium-authorize@vault-gc.iam.gserviceaccount.com
+ingress:
+  hosts:
+    - who.${domain}
+    - hello.${domain}
+    - vault.${domain}
+    - blog.${domain}
+  annotations:
+    kubernetes.io/ingress.class: traefik-cert-manager
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    cert-manager.io/cluster-issuer: letsencrypt-live
+  secretName: pomerium-http01-cert
+forwardAuth:
+  enabled: true
+  internal: true
+config:
+  rootDomain: ${domain}
+  generateTLS: false
+  insecure: true
+  extraOpts:
+    pomerium_debug: true
+    jwt_claims_headers: email,groups,user,nickname,name,picture,email_verified,phone
+  policy:
+    - from: https://hello.${domain}
+      to: ${cloudrun_url}
+      allowed_users:
+        - ${email}
+      preserve_host_header: false
+      pass_identity_headers: true
+      tls_skip_verify: true
+      enable_google_cloud_serverless_authentication: true
+    - from: https://blog.${domain}
+      to: ${cloudrun_url}
+      allow_public_unauthenticated_access: true
+      preserve_host_header: false
+      pass_identity_headers: false
+      tls_skip_verify: true
+      enable_google_cloud_serverless_authentication: true
+    - from: https://vault.${domain}
+      to: ${vault_cloudrun_url}
+      allow_public_unauthenticated_access: true
+      preserve_host_header: false
+      pass_identity_headers: false
+      tls_skip_verify: true
+      enable_google_cloud_serverless_authentication: true
+    - from: https://who.${domain}
+      to: http://whoami.whoami
+      # allowed_domains:
+        # - ${domain}
+      # allowed_groups:
+        # - admin
+      # allow_any_authenticated_user: true
+      allowed_users:
+        - ${email}
+      preserve_host_header: true
+      pass_identity_headers: true
+      tls_skip_verify: true

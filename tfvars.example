@@ -1,0 +1,71 @@
+project_id            = "my-project"
+# Region set to us-central1 to take advantage of free tier
+region                = "us-central1"
+zones                 = ["us-central1-a"]
+cluster_name          = "kluster"
+domain                = "my.dom.ain"
+domain_filter         = "my.dom.ain"
+email                 = "my@emai.il"
+# Set run_post_install = true after first run
+run_post_install      = false
+# Select your dns provider.
+# Find more in externaldns helm chart https://github.com/bitnami/charts/blob/master/bitnami/external-dns
+dns_auth              = [
+    {
+      name = "provider"
+      value = "google"
+     }
+  ]
+dns_auth              = [
+    {
+      name = "provider"
+      value = "cloudflare"
+     },
+    {
+      name = "cloudflare.email"
+      value = "my@email.com"
+    },
+    {
+      name = "cloudflare.apiToken"
+      value = "mycloudflareapitoken"
+    },
+    {
+      name = "cloudflare.apiKey"
+      value = "mycloudflareapikey"
+    }
+  ]
+dns_auth              = [
+    {
+      name = "provider"
+      value = "digitalocean"
+     },
+    {
+      name = "digitalocean.apiToken"
+      value = "mydigitaloceantoken"
+    }
+  ]
+dns_auth              = [
+    {
+      name = "provider"
+      value = "linode"
+     },
+    {
+      name = "linode.apiToken"
+      value = "mylinodetoken"
+    }
+  ]
+# OIDC Configuration
+oidc_config           = [
+    {
+      name = "authenticate.idp.provider"
+      value = "google"
+     },
+    {
+      name = "authenticate.idp.clientID"
+      value = "[project_id]-[hash].apps.googleusercontent.com"
+    },
+    {
+      name = "authenticate.idp.clientSecret"
+      value = "mysecret"
+    }
+  ]

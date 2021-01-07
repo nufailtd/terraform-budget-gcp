@@ -1,0 +1,188 @@
+#cloud-config
+users:
+- name: mysql
+  uid: 2000
+
+bootcmd:
+  - sudo sysctl vm.disk_based_swap=1
+  - sudo fallocate -l 2G /var/swapfile
+  - sudo chmod 600 /var/swapfile
+  - sudo mkswap /var/swapfile
+  - sudo swapon /var/swapfile
+write_files:
+- path: /var/lib/docker/daemon.json
+  permissions: 0644
+  owner: root
+  content: |
+    {
+      "live-restore": true,
+      "storage-driver": "overlay2",
+      "log-opts": {
+        "max-size": "64m"
+      }
+    }
+- path: /run/k8s-conf/ca.crt
+  permissions: 0644
+  owner: root
+  content: |
+    ${indent(4, ca_crt)}
+# traefik-token script
+- path: /run/k8s-conf/traefik-token.sh
+  permissions: 0700
+  owner: root
+  content: |
+    #!/bin/sh
+    cat << EOF > /data/token
+    $TRAEFIK_TOKEN
+    EOF
+# - path: /run/k8s-conf/token
+  # permissions: 0644
+  # owner: root
+  # content: |
+    # ${indent(4, traefik_token)}
+- path: /run/startup.sh
+  permissions: 0744
+  owner: root
+  content: |
+    ${indent(4, startup_script)}
+# disable systemd-resolved to free port 53 on the loopback interface
+- path: /etc/systemd/resolved.conf
+  permissions: 0644
+  owner: root
+  content: |
+    [Resolve]
+    LLMNR=no
+    DNSStubListener=no
+# Write coreDNS config
+- path: /etc/coredns/Corefile
+  permissions: 0644
+  owner: root
+  content: |
+    .:53 {
+      forward . /etc/resolv.conf
+      reload
+      log
+      errors
+      file /etc/coredns/domain.db ${domain}
+    }
+# Write domain config
+- path: /etc/coredns/domain.db
+  permissions: 0644
+  owner: root
+  content: |
+    ${domain}.   IN SOA sns.dns.icann.com. noc.dns.icann.com. 2015082541 7200 3600 1209600 3600
+    ${domain}.   IN NS  b.iana-servers.net.
+    ${domain}.   IN NS  a.iana-servers.net.
+    ${domain}.   IN A   ${private_ip}
+    *            IN CNAME  ${domain}.
+# coredns container service
+- path: /etc/systemd/system/coredns.service
+  permissions: 0644
+  owner: root
+  content: |
+    [Unit]
+    Description=Start CoreDNS container
+    After=gcr-online.target docker.socket
+    Wants=gcr-online.target docker.socket docker-events-collector.service
+    [Service]
+    ExecStart=/usr/bin/docker run --rm --name=coredns  \
+      --log-driver=json-file --network host \
+      -v /etc/coredns:/etc/coredns \
+      coredns/coredns -conf /etc/coredns/Corefile
+    ExecStop=/usr/bin/docker stop coredns
+# chisel env script
+- path: /run/secrets/chisel-env.sh
+  permissions: 0700
+  owner: root
+  content: |
+    #!/bin/sh
+    cat << EOF > /data/chisel.env
+    {"$CHISEL_USER:$CHISEL_PASSWORD": [""]}
+    EOF
+# generate chisel env file
+- path: /run/generate-chisel-env.sh
+  permissions: 0700
+  owner: root
+  content: |
+    #!/bin/bash
+    docker run --rm -i -v /run/secrets/:/data \
+    -e CHISEL_USER=${proxy_user} \
+    -e CHISEL_PASSWORD=${proxy_password} \
+    us-docker.pkg.dev/berglas/berglas/berglas:latest \
+    exec -- /data/chisel-env.sh
+# chisel container service
+- path: /etc/systemd/system/chisel.service
+  permissions: 0644
+  owner: root
+  content: |
+    [Unit]
+    Description=Start Chisel TCP/UDP Tunnel container
+    After=gcr-online.target docker.socket
+    Wants=gcr-online.target docker.socket docker-events-collector.service
+    [Service]
+    ExecStartPre=/run/generate-chisel-env.sh
+    ExecStart=/usr/bin/docker run --rm --name=chisel  \
+      --log-driver=json-file --network host \
+      -v /run/secrets/chisel.env:/run/secrets/chisel.env \
+      jpillora/chisel server -p 8181 --socks5 --reverse \
+      --authfile=/run/secrets/chisel.env
+    ExecStop=/usr/bin/docker stop chisel
+# mysql env script
+- path: /run/secrets/mysql-env.sh
+  permissions: 0700
+  owner: root
+  content: |
+    #!/bin/sh
+    cat << EOF > /data/mysql.env
+    MYSQL_RANDOM_ROOT_PASSWORD=yes
+    MYSQL_DATABASE=container-db
+    MYSQL_USER=$MYSQL_USER
+    MYSQL_PASSWORD=$MYSQL_PASSWORD
+    EOF
+# generate mysql env file
+- path: /run/generate-mysql-env.sh
+  permissions: 0700
+  owner: root
+  content: |
+    #!/bin/bash
+    docker run --rm -i -v /run/secrets/:/data \
+    -e MYSQL_USER=${mysql_user} \
+    -e MYSQL_PASSWORD=${mysql_password} \
+    us-docker.pkg.dev/berglas/berglas/berglas:latest \
+    exec -- /data/mysql-env.sh;
+    chown 2000 /run/secrets/mysql.env
+# mysql data disk service
+- path: /etc/systemd/system/mysql-data.service
+  permissions: 0644
+  owner: root
+  content: |
+    [Unit]
+    Description=MySQL data disk
+    Before=mysql.service
+    [Service]
+    Type=oneshot
+    ExecStart=/bin/mkdir -p /mnt/stateful_partition/mysql-data
+    ExecStart=/bin/chown -R 2000 /mnt/stateful_partition/mysql-data
+    RemainAfterExit=true
+# mysql container service
+- path: /etc/systemd/system/mysql.service
+  permissions: 0644
+  owner: root
+  content: |
+    [Unit]
+    Description=MySQL service
+    After=mysql-data.service gcr-online.target docker.socket docker-events-collector.service
+    Wants=mysql-data.service gcr-online.target docker.socket
+    [Service]
+    ExecStartPre=/run/generate-mysql-env.sh
+    ExecStart=/usr/bin/docker run --rm --name=mysql \
+      --user 2000:2000 \
+      --log-driver=json-file \
+      --env-file=/run/secrets/mysql.env \
+      -v /mnt/stateful_partition/mysql-data:/var/lib/mysql \
+      -p 127.0.0.1:3306:3306 \
+      mysql:5.7 \
+      --ignore-db-dir=lost+found
+    ExecStop=/usr/bin/docker stop mysql
+runcmd:
+  - bash /run/startup.sh
