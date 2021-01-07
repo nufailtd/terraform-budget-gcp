@@ -82,13 +82,14 @@ Then perform the following commands on the seed_project folder:
 - `terraform apply` to apply the infrastructure build
 #### File structure
 This module has the following folders and files:
-
+```
 - /seed_project/: root folder
 - /seed_project/main.tf: main file for this module, creates the project's resources
 - /seed_project/tfvars.example: an example of a file to generate terraform.tfvars
 - /seed_project/variables.tf: all the variables for the module
 - /seed_project/output.tf: the outputs of the module
 - /seed_project/README.md: information about the module
+```
 ---
 ### Create the GCP Project
 Create a file `terraform.tfvars` with the following content;
@@ -112,13 +113,14 @@ Then perform the following commands in the budget_gcp_project folder:
 - `terraform apply` to apply the infrastructure build
 #### File structure
 This module has the following folders and files:
-
+```
 - /budget_gcp_project/: root folder
 - /budget_gcp_project/main.tf: main file for this module, creates the project's resources
 - /budget_gcp_project/tfvars.example: an example of a file to generate terraform.tfvars
 - /budget_gcp_project/variables.tf: all the variables for the module
 - /budget_gcp_project/output.tf: the outputs of the module
 - /budget_gcp_project/README.md: information about the module
+```
 ---
 ### Create resources in the GCP Project
 Create a file `terraform.tfvars` with the following content;
@@ -180,7 +182,7 @@ To delete the projects and stop charges accruing to your account run
 - `terraform destroy` to destroy the built infrastructure
 #### File structure
 The project has the following folders and files:
-
+```
 - /: root folder
 - /cert/: - creates certificated for our domain.
 - /cloud-run/: creates a ghost blog cloudrun service
@@ -199,5 +201,5 @@ The project has the following folders and files:
 - /vault-sa/: creates a kubernetes service account to be used by the vault application
 - /workload-identity/: allows us to access google apis without requiring us to save key files
 - /README.md: this file
-
+```
 ---
