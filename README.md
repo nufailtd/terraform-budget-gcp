@@ -157,7 +157,7 @@ oidc_config           = [
   ]
 ```
 
-[![Open this project in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/nufailtd/terraform-budget-gcp&open_in_editor=kluster_project/terraform.tfvars)
+[![Open this project in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/nufailtd/terraform-budget-gcp&open_in_editor=terraform.tfvars)
 
 Then perform the following commands on the kluster_project folder:
 
@@ -170,7 +170,7 @@ Once completed modify `terraform.tfvars` and set
 ```
 run_post_install = true
 ```
-Then perform the following commands on the kluster_project folder:
+Then perform the following commands:
 
 - `terraform init` to get the plugins
 - `terraform plan` to see the infrastructure plan
