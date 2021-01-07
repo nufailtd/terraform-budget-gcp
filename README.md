@@ -184,22 +184,22 @@ To delete the projects and stop charges accruing to your account run
 The project has the following folders and files:
 ```
 - /: root folder
-- /cert/: - creates certificated for our domain.
-- /cloud-run/: creates a ghost blog cloudrun service
-- /custom-nat/: creates an internet gateway for our private cluster
-- /dns/: creates domain records for our domain name
-- /kubeip/: assigns a static IP to instances in our cluster *not used*
+- /modules/cert/: - creates certificated for our domain.
+- /modules/cloud-run/: creates a ghost blog cloudrun service
+- /modules/custom-nat/: creates an internet gateway for our private cluster
+- /modules/dns/: creates domain records for our domain name
+- /modules/kubeip/: assigns a static IP to instances in our cluster *not used*
+- /modules/pomerium-app/: secures our applications to provide access to from allowed users only
+- /modules/test-workload-identity/: tests the google workload identity feature
+- /modules/traefik-sa/: creates a kubernetes service account used by traefik-vm
+- /modules/traefik-vm/: creates an instance with a public ip to route traffic to our cluster
+- /modules/vault-cloud-run/: creates a vault application running in cloudrun
+- /modules/vault-sa/: creates a kubernetes service account to be used by the vault application
+- /modules/workload-identity/: allows us to access google apis without requiring us to save key files
+- /tfvars.example: an example of a file to generate terraform.tfvars
+- /variables.tf: variables used by our main.tf file
 - /main.tf/: creates gke cluster and the rest of the modules
 - /outputs.tf: displays created resources
-- /pomerium-app/: secures our applications to provide access to from allowed users only
-- /test-workload-identity/: tests the google workload identity feature
-- /tfvars.example: an example of a file to generate terraform.tfvars
-- /traefik-sa/: creates a kubernetes service account used by traefik-vm
-- /traefik-vm/: creates an instance with a public ip to route traffic to our cluster
-- /variables.tf: variables used by our main.tf file
-- /vault-cloud-run/: creates a vault application running in cloudrun
-- /vault-sa/: creates a kubernetes service account to be used by the vault application
-- /workload-identity/: allows us to access google apis without requiring us to save key files
 - /README.md: this file
 ```
 ---
