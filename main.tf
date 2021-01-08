@@ -155,7 +155,7 @@ module "gke" {
 data "google_client_config" "default" {}
 
 module "gke_auth" {
-  source = "terraform-google-modules/kubernetes-engine/google/modules/auth"
+  source = "terraform-google-modules/kubernetes-engine/google//modules/auth"
 
   project_id   = var.project_id
   location     = module.gke.location
