@@ -30,14 +30,39 @@ Resources created  include;
 You need the following before you can proceed. Skip if you already have these.  
 **1. Get a Domain Name**
 <details>
-  <summary>Click to expand!</summary>
-TODO
+  <summary>Click to expand</summary>
+ 
+ #### Step 1  
+1. Visit [https://www.freenom.com](https://www.freenom.com).  
+2. Search for a domain you like and click **Check Availability.  
+3. If the domain name is available click **Get it now!** and then click **Checkout.  
+4. Set the period to 12 months. Then click **Continue**.  
+5. Check **I have read and agree to the Terms & Conditions**. Then click **Complete Order**.  
+6. Provide your email and set up a password.
+6. You will receive an email notification to complete your order.
+7. Click on the confirmation link in the email and login in to the dashboard to manage your registered domain.
+#### Step 2
+1. Visit [https://dash.cloudflare.com/sign-up](https://dash.cloudflare.com/sign-up).
+2. Click **Add a site** in Account Dashboard.
+3. Type in your domain and click **Add site**.
+4. Select the Free Plan and click **Confirm plan**.
+5. Cloudflare will scan for existing DNS records. Wait until it finishes, and click **Continue**.  
+6. Cloudflare will give you two nameservers to set up in Freenom.
+#### Step 3
+1. Go back to Freenom, Click **Services** > **My Domains**. Click **Manage Domain** on the domain that you’re configuring.
+2. Click **Management Tools** > **Nameservers** > **Use custom nameservers** (enter below). Now enter the nameservers provided by Cloudflare, and click **Change Nameservers**.
+3. Go back to Cloudflare, click **Done**, **check nameservers**. It may take a while, you will receive an email once your domain has been added.
+4. Click **Profile** > **API Tokens** > **Create Token**
+5. On **Edit zone DNS**, Click **Use Template** > Under **Zone Resources** > Select your domain
+6. Click **Continue To Summary** > **Create Token** then copy and save the created token.
+
+#### [Reference](https://dev.to/hieplpvip/get-a-free-domain-with-freenom-and-cloudflare-k1j)
 </details>
 
 **2. Sign up for a GCP Account**
 <details>
-  <summary>Click to expand!</summary>
-TODO
+  <summary>Click to expand</summary>
+1. Visit [https://console.cloud.google.com/freetrial/signup](https://console.cloud.google.com/freetrial/signup) to create your account.
 </details>
 
 **3. Create an Organization in GCP**
