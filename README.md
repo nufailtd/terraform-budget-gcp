@@ -248,7 +248,10 @@ oidc_config           = [
 
 [![Open this project in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/nufailtd/terraform-budget-gcp&open_in_editor=main.tf)
 
-Then perform the following commands on the kluster_project folder:
+Then perform the following commands:
+-  `gcloud config set project [ YOUR_PROJECT_ID ]`
+-  `gcloud config set auth/impersonate_service_account project-service-account@[ YOUR_PROJECT ].iam.gserviceaccount.com`
+-  `export GOOGLE_OAUTH_ACCESS_TOKEN=$(gcloud auth print-access-token)`
 
 - `terraform init` to get the plugins
 - `terraform plan` to see the infrastructure plan
