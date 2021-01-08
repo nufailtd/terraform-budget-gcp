@@ -281,7 +281,7 @@ module "vault-sa" {
   vault_cloudrun_url     = module.vault.app_url
 }
 
-
+/*
 module "vault-config" {
   source = "./modules/vault-cloud-run/vault-config"
 
@@ -297,7 +297,7 @@ module "vault-config" {
   oidc_config                = var.oidc_config
   email                      = var.email
 }
-
+*/
 
 module "pomerium-workload-identity" {
   source              = "./modules/workload-identity"
