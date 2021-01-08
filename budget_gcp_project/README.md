@@ -43,3 +43,15 @@ service_account_email = project-service-account@myproject.iam.gserviceaccount.co
 service_account_id = project-service-account
 service_account_name = projects/myproject/serviceAccounts/project-service-account@myproject.iam.gserviceaccount.com
 ```
+
+
+#### File structure
+This module has the following folders and files:
+```
+- /budget_gcp_project/: root folder
+- /budget_gcp_project/main.tf: main file for this module, creates the project's resources
+- /budget_gcp_project/tfvars.example: an example of a file to generate terraform.tfvars
+- /budget_gcp_project/variables.tf: all the variables for the module
+- /budget_gcp_project/output.tf: the outputs of the module
+- /budget_gcp_project/README.md: information about the module
+```

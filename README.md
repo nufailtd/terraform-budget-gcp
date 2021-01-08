@@ -48,7 +48,13 @@ You need the following before you can proceed. Skip if you already have these.
 ![Complete Setup](./images/freenom/05-freenom-complete.png) 
 9. You should be able to view your registered domain
 ![Domain](./images/freenom/06-freenom-successful.png) 
+
+ You **cannot** use cloudflare API if your domain is a 
+`.cf, .ga, .gq, .ml, or .tk`  
+**Skip** Steps 2 & 3 if you have any of these.
+
 #### Step 2
+
 1. Visit [https://dash.cloudflare.com/sign-up](https://dash.cloudflare.com/sign-up).
 2. Click **Add a site** in Account Dashboard.
 3. Type in the domain you created above and click **Add site**.
@@ -79,7 +85,66 @@ Provide the required information and you should be greeted with this page.
 
 </details>
 
-**3. Create an Oauth2 Client in GCP**
+
+
+---
+
+### Create the GCP Seed Project
+**Please skip** this for now and return when/if you successfully create an organization.  
+We are able to deploy our resources without it. 
+<details>
+  <summary>Click to show</summary>
+Create a file `terraform.tfvars` with the following information from the organization you just created;
+
+```
+org_id                  = "<ORGANIZATION_ID>"
+
+billing_account         = "<BILLING_ACCOUNT_ID>"
+
+group_org_admins        = "<admin@domain.com>"
+
+group_billing_admins    = "<billing@domain.com>"
+
+default_region          = "us-central1"
+
+sa_enable_impersonation = true
+```
+
+[![Open this project in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/nufailtd/terraform-budget-gcp&open_in_editor=main.tf&cloudshell_workspace=seed_project)
+
+Then perform the following commands on the seed_project folder:
+
+- `terraform init` to get the plugins
+- `terraform plan` to see the infrastructure plan
+- `terraform apply` to apply the infrastructure build
+
+</details>
+
+---
+
+### Create the GCP Project
+Create a file `terraform.tfvars` with the following required variables;
+
+```
+email                       = "user@gmail.com"
+billing_account             = " 02E280-9E2C47-1DF365"
+name                        = "myproject"
+```
+
+[![Open this project in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/nufailtd/terraform-budget-gcp&open_in_editor=main.tf&cloudshell_workspace=budget_gcp_project)
+
+Then perform the following commands in the budget_gcp_project folder:
+
+- `terraform init` to get the plugins
+- `terraform plan` to see the infrastructure plan
+- `terraform apply` to apply the infrastructure build
+
+This operation will output the `project_id` to be used in the next steps.
+
+Befor creating our resources it will be convenient to complete the following manual operations.  
+This will help us automate the final step.
+
+**Create an Oauth2 Client in GCP**
 <details>
   <summary>Click to expand</summary>
   
@@ -119,82 +184,44 @@ Download the client_secret file to be used in a later configuration.
 </details>
 
 
----
 
-### Create the GCP Seed Project
-**Please skip** this for now and return when/if you successfully create an organization.  
-We are able to deploy our resources without it. 
+**Create a zone in CloudDNS**
 <details>
-  <summary>Click to show</summary>
-Create a file `terraform.tfvars` with the following content from the steps completed above;
+  <summary>Click to expand</summary>
 
-```
-org_id                  = "<ORGANIZATION_ID>"
+  1. In your Google Cloud account go to [Net services](https://console.cloud.google.com/projectselector/net-services/dns/zones).
+![Select Project](./images/dns/00-clouddns-select-project.png)
+ Select the project created above then navigate to **Cloud DNS** using the left-hand menu and click **Create zone**
+![Create Zone](./images/dns/01-clouddns-createzone.png)
 
-billing_account         = "<BILLING_ACCOUNT_ID>"
+2. Create New Zone.  
+On the **Create a DNS Zone** page, enter a **Zone Name** (a nice approach is to replace the periods in your domain with a dash) then enter the domain you created above in **DNS name**.
+![Enter Zone details](./images/dns/02-clouddns-createzone.png)
 
-group_org_admins        = "<admin@domain>"
+3. Get Nameservers.  
+Nameservers in the format **ns-cloud-xx.googledomains.com** will be presented to you.  
+ Take note of them as you will use them in the next step.
+![Enter Zone details](./images/dns/03-clouddns-getnameservers.png)
 
-group_billing_admins    = "<billing@domain>"
-
-default_region          = "us-central1"
-
-sa_enable_impersonation = true
-
-```
-
-[![Open this project in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/nufailtd/terraform-budget-gcp&open_in_editor=main.tf&cloudshell_workspace=seed_project)
-
-Then perform the following commands on the seed_project folder:
-
-- `terraform init` to get the plugins
-- `terraform plan` to see the infrastructure plan
-- `terraform apply` to apply the infrastructure build
-#### File structure
-This module has the following folders and files:
-```
-- /seed_project/: root folder
-- /seed_project/main.tf: main file for this module, creates the project's resources
-- /seed_project/tfvars.example: an example of a file to generate terraform.tfvars
-- /seed_project/variables.tf: all the variables for the module
-- /seed_project/output.tf: the outputs of the module
-- /seed_project/README.md: information about the module
-```
 </details>
----
 
-### Create the GCP Project
-Create a file `terraform.tfvars` with the following content;
 
-```
-org_id                      = "<ORGANIZATION_ID>"
-billing_account             = "<BILLING_ACCOUNT_ID>"
-group_org_admins            = "<admin@domain>"
-impersonate_service_account = "<seed_project service account>"
-name                        = "<project_name>"
-bucket_project              = "<project_bucket_name>"
-default_region              = "us-central1"
-```
+**Update Nameservers in Freenom**
+<details>
+  <summary>Click to expand</summary>
 
-[![Open this project in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/nufailtd/terraform-budget-gcp&open_in_editor=main.tf&cloudshell_workspace=budget_gcp_project)
+1. Login to your Freenom account, Click **Services** > **My Domains**. Click **Manage Domain** on the domain that you’re configuring.
+![Manage Domain](./images/freenom/07-freenom-manage-domain.png) 
+2. Click **Management Tools** > **Nameservers** > **Use custom nameservers** (enter below). Now enter the nameservers from CloudDNS, and click **Change Nameservers**.
+![Update Nameservers](./images/dns/04-freenom-updatenameservers.png)
 
-Then perform the following commands in the budget_gcp_project folder:
+ 3. Confirm the nameservers have been set successfully.
+![Create Zone](./images/dns/05-freenom-confirm.png)
 
-- `terraform init` to get the plugins
-- `terraform plan` to see the infrastructure plan
-- `terraform apply` to apply the infrastructure build
 
-This operation will output the `project_id` to be used in the next step.
-#### File structure
-This module has the following folders and files:
-```
-- /budget_gcp_project/: root folder
-- /budget_gcp_project/main.tf: main file for this module, creates the project's resources
-- /budget_gcp_project/tfvars.example: an example of a file to generate terraform.tfvars
-- /budget_gcp_project/variables.tf: all the variables for the module
-- /budget_gcp_project/output.tf: the outputs of the module
-- /budget_gcp_project/README.md: information about the module
-```
+</details>
+
+
 ---
 ### Create resources in the GCP Project
 The variables for this step are derived from the previous steps, namely:
@@ -218,16 +245,8 @@ email            = "<your email>"
 dns_auth              = [
     {
       name = "provider"
-      value = "cloudflare"
-     },
-    {
-      name = "cloudflare.email"
-      value = "my@email.com"
-    },
-    {
-      name = "cloudflare.apiToken"
-      value = "mycloudflareapitoken"
-    }
+      value = "google"
+     }
   ]
 # OIDC Configuration
 oidc_config           = [
@@ -249,9 +268,15 @@ oidc_config           = [
 [![Open this project in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/nufailtd/terraform-budget-gcp&open_in_editor=main.tf)
 
 Then perform the following commands:
--  `gcloud config set project [ YOUR_PROJECT_ID ]`
--  `gcloud config set auth/impersonate_service_account project-service-account@[ YOUR_PROJECT ].iam.gserviceaccount.com`
--  `export GOOGLE_OAUTH_ACCESS_TOKEN=$(gcloud auth print-access-token)`
+
+It is recommended to run this before performing the subsequent commands.  
+This ensures that you use the project's service account to create resources. 
+The token expires every hour so you'll have to re-issue these commands if you get an error.
+ ```
+ gcloud config set project [ YOUR_PROJECT_ID ]
+ gcloud config set auth/impersonate_service_account project-service-account@[ YOUR_PROJECT_ID ].iam.gserviceaccount.com`
+export GOOGLE_OAUTH_ACCESS_TOKEN=$(gcloud auth print-access-token)
+```
 
 - `terraform init` to get the plugins
 - `terraform plan` to see the infrastructure plan

@@ -36,3 +36,14 @@ Run the following commands
 - `terraform init` to get the plugins
 - `terraform plan` to see the infrastructure plan
 - `terraform apply` to apply the infrastructure build
+
+#### File structure
+This module has the following folders and files:
+```
+- /seed_project/: root folder
+- /seed_project/main.tf: main file for this module, creates the project's resources
+- /seed_project/tfvars.example: an example of a file to generate terraform.tfvars
+- /seed_project/variables.tf: all the variables for the module
+- /seed_project/output.tf: the outputs of the module
+- /seed_project/README.md: information about the module
+```
