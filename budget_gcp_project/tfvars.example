@@ -1,7 +1,9 @@
-org_id                      = "<ORGANIZATION_ID>"
+## REQUIRED ##
+email                       = "<your_email>"
 billing_account             = "<BILLING_ACCOUNT_ID>"
+name                        = "<project_name>"
+## OPTIONAL ##
+org_id                      = "<ORGANIZATION_ID>"
 group_org_admins            = "<admin@domain>"
 impersonate_service_account = "<seed_project service account>"
-name                        = "<project_name>"
-bucket_project              = "<project_bucket_name>"
 default_region              = "us-central1"

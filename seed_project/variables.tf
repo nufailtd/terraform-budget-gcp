@@ -23,3 +23,9 @@ variable "default_region" {
   type        = string
   default     = "us-central1"
 }
+
+variable "sa_enable_impersonation" {
+  description = "Allow org_admins group to impersonate service account & enable APIs required."
+  type        = bool
+  default     = false
+}

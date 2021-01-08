@@ -32,10 +32,10 @@ output "project_bucket_url" {
 
 output "org_id" {
   description = "Project's organization id."
-  value       = data.terraform_remote_state.seed.outputs.org_id
+  value       = var.org_id
 }
 
 output "billing_account" {
   description = "Project billing account."
-  value       = data.terraform_remote_state.seed.outputs.billing_account
+  value       = var.billing_account
 }

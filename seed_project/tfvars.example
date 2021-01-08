@@ -1,11 +1,11 @@
-org_id = "000000000000"
+org_id                  = "000000000000"
 
-billing_account = "000000-000000-000000"
+billing_account         = "000000-000000-000000"
 
-group_org_admins = "admin@domai.com"
+group_org_admins        = "admin@domain.com"
 
-group_billing_admins = "admin@domain.com
+group_billing_admins    = "billing@domain.com"
 
-default_region = "us-central1"
+default_region          = "us-central1"
 
 sa_enable_impersonation = true

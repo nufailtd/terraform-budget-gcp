@@ -1,21 +1,12 @@
-data "terraform_remote_state" "seed" {
-  backend = "local"
-
-  config = {
-    path = "${path.module}/../seed_project/terraform.tfstate"
-  }
-}
-
-
 module "project-factory" {
   source  = "terraform-google-modules/project-factory/google"
   version = "~> 9.2"
 
-  name                              = "vault-gc"
-  impersonate_service_account       = data.terraform_remote_state.seed.outputs.terraform_sa_email
-  bucket_project                    = "vault-gc"
-  billing_account                   = data.terraform_remote_state.seed.outputs.billing_account
-  org_id                            = data.terraform_remote_state.seed.outputs.org_id
+  name                              = var.name
+  impersonate_service_account       = var.impersonate_service_account
+  bucket_project                    = var.name
+  billing_account                   = var.billing_account
+  org_id                            = var.org_id
   default_service_account           = "disable"
   sa_role                           = "roles/editor"
   use_tf_google_credentials_env_var = false
@@ -64,8 +55,9 @@ resource "google_service_account_iam_member" "org_admin_sa_impersonate_permissio
 
   service_account_id = module.project-factory.service_account_name
   role               = "roles/iam.serviceAccountTokenCreator"
-  member             = "group:${var.group_org_admins}"
+  member             = var.org_id == "" ? "user:${var.email}" : "group:${var.group_org_admins}"
 }
+
 
 resource "google_project_iam_member" "grant_roles_to_sa" {
   for_each = toset(var.additional_roles)

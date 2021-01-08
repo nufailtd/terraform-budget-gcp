@@ -50,3 +50,9 @@ variable "additional_roles" {
     "roles/secretmanager.admin",
   ]
 }
+
+variable "email" {
+  description = "Your email. This is a fallback in case you are unable to create an organization."
+  type        = string
+  default     = ""
+}
