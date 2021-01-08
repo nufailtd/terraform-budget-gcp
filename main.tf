@@ -163,7 +163,7 @@ module "gke_auth" {
 }
 
 module "traefik-sa" {
-  source = "modules/traefik-sa"
+  source = "./modules/traefik-sa"
 
   project_id             = var.project_id
   host                   = module.gke_auth.host
@@ -175,7 +175,7 @@ module "traefik-sa" {
 }
 
 module "traefik" {
-  source = "modules/traefik-vm"
+  source = "./modules/traefik-vm"
 
   project_id         = var.project_id
   zone               = module.gke.location
@@ -193,7 +193,7 @@ module "traefik" {
 
 
 module "dns" {
-  source = "modules/dns"
+  source = "./modules/dns"
 
   project_id             = var.project_id
   host                   = module.gke_auth.host
@@ -209,7 +209,7 @@ module "dns" {
 
 
 module "cert" {
-  source = "modules/cert"
+  source = "./modules/cert"
 
   project_id             = var.project_id
   zone                   = module.gke.location
@@ -222,7 +222,7 @@ module "cert" {
 
 
 module "custom-nat" {
-  source = "modules/custom-nat"
+  source = "./modules/custom-nat"
 
   project_id   = var.project_id
   zone         = module.gke.location
@@ -234,7 +234,7 @@ module "custom-nat" {
 }
 
 module "cloud-run" {
-  source             = "modules/cloud-run"
+  source             = "./modules/cloud-run"
   project_id         = var.project_id
   zone               = module.gke.location
   region             = var.region
@@ -245,7 +245,7 @@ module "cloud-run" {
 }
 
 module "pomerium" {
-  source = "modules/pomerium-app"
+  source = "./modules/pomerium-app"
 
   project_id             = var.project_id
   zone                   = module.gke.location
@@ -260,7 +260,7 @@ module "pomerium" {
 }
 
 module "vault" {
-  source = "modules/vault-cloud-run"
+  source = "./modules/vault-cloud-run"
 
   name = "vault"
 
@@ -273,7 +273,7 @@ module "vault" {
 
 
 module "vault-sa" {
-  source = "modules/vault-sa"
+  source = "./modules/vault-sa"
 
   host                   = module.gke_auth.host
   cluster_ca_certificate = module.gke_auth.cluster_ca_certificate
@@ -283,7 +283,7 @@ module "vault-sa" {
 
 
 module "vault-config" {
-  source = "modules/vault-cloud-run/vault-config"
+  source = "./modules/vault-cloud-run/vault-config"
 
   vault_address              = module.vault.app_url
   root_token_decrypt_command = module.vault.root_token_decrypt_command
@@ -300,7 +300,7 @@ module "vault-config" {
 
 
 module "pomerium-workload-identity" {
-  source              = "modules/workload-identity"
+  source              = "./modules/workload-identity"
   use_existing_k8s_sa = true
   name                = "pomerium-authorize"
   namespace           = "default"
@@ -311,7 +311,7 @@ module "pomerium-workload-identity" {
 }
 
 module "external-dns-workload-identity" {
-  source              = "modules/workload-identity"
+  source              = "./modules/workload-identity"
   use_existing_k8s_sa = true
   name                = "external-dns"
   namespace           = "default"
@@ -322,7 +322,7 @@ module "external-dns-workload-identity" {
 }
 
 module "test-workload-identity" {
-  source = "modules/test-workload-identity"
+  source = "./modules/test-workload-identity"
 
   host                   = module.gke_auth.host
   cluster_ca_certificate = module.gke_auth.cluster_ca_certificate
