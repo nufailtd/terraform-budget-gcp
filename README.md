@@ -162,6 +162,7 @@ This module has the following folders and files:
 ```
 </details>
 ---
+
 ### Create the GCP Project
 Create a file `terraform.tfvars` with the following content;
 
