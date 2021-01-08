@@ -39,8 +39,8 @@ You need the following before you can proceed. Skip if you already have these.
 4. Set the period to 12 months. Then click **Continue**.  
 5. Check **I have read and agree to the Terms & Conditions**. Then click **Complete Order**.  
 6. Provide your email and set up a password.
-6. You will receive an email notification to complete your order.
-7. Click on the confirmation link in the email and login in to the dashboard to manage your registered domain.
+7. You will receive an email notification to complete your order.
+8. Click on the confirmation link in the email and login in to the dashboard to manage your registered domain.
 #### Step 2
 1. Visit [https://dash.cloudflare.com/sign-up](https://dash.cloudflare.com/sign-up).
 2. Click **Add a site** in Account Dashboard.
@@ -65,22 +65,19 @@ You need the following before you can proceed. Skip if you already have these.
 1. Visit [https://console.cloud.google.com/freetrial/signup](https://console.cloud.google.com/freetrial/signup) to create your account.
 </details>
 
-**3. Create an Organization in GCP**
+**3. Create an Oauth2 Client in GCP**
 <details>
   <summary>Click to expand!</summary>
 TODO
 </details>
 
-**4. Create an Oauth2 Client in GCP**
-<details>
-  <summary>Click to expand!</summary>
-TODO
-</details>
 
 ---
 
 ### Create the GCP Seed Project
-
+Please Skip this for now and return when/if you successfully create an organization. 
+<details>
+  <summary>Click to show</summary>
 Create a file `terraform.tfvars` with the following content from the steps completed above;
 
 ```
@@ -115,6 +112,7 @@ This module has the following folders and files:
 - /seed_project/output.tf: the outputs of the module
 - /seed_project/README.md: information about the module
 ```
+</details>
 ---
 ### Create the GCP Project
 Create a file `terraform.tfvars` with the following content;
