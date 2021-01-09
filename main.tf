@@ -204,6 +204,7 @@ module "dns" {
   dns_auth               = var.dns_auth
   domain                 = var.domain
   domain_filter          = var.domain_filter
+  check_interval         = "2m"
 
 }
 

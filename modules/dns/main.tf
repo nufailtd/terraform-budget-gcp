@@ -9,6 +9,9 @@ variable project_id {}
 variable domain_filter {
   default = ""
 }
+variable check_interval {
+  default = "20m"
+}
 variable traefik_ip {}
 variable traefik_ip_private {}
 variable "dns_auth" {}
@@ -117,7 +120,7 @@ resource "helm_release" "external-dns" {
 
   set {
     name  = "interval"
-    value = "20m"
+    value = var.check_interval
   }
 
   set {
