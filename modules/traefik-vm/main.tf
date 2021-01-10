@@ -31,7 +31,7 @@ module "gce-container" {
   cos_image_name = var.cos_image_name
 
   container = {
-    image = "traefik:v2.3.4"
+    image = "traefik:v2.3.5"
     /*
     command = [
       "tail"
@@ -157,7 +157,7 @@ data "template_file" "startup_script" {
 }
 
 resource "google_compute_address" "instance-static-ip" {
-  name = "traefik-container-vm-055e3573"
+  name = "traefik-container-vm"
 }
 
 resource "google_compute_instance" "vm" {
