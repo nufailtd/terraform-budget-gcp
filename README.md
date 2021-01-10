@@ -171,7 +171,10 @@ On the **Credentials** page, click **Create credentials** and choose **OAuth [Cl
 On the **Create [Client ID]** page, select **Web application**.   
 Under **Authorized redirect URIs**
 set the following parameters substituting `domain.com` for domain you created above  
-`https://authenticate.domain.com/oauth2/callback`  `https://vault.domain.com//ui/vault/auth/oidc/oidc/callback`
+`https://authenticate.domain.com/oauth2/callback`  
+`https://vault.domain.com//ui/vault/auth/oidc/oidc/callback`  
+`https://authenticate.gc.domain.com/oauth2/callback`  
+`https://vault.gc.domain.com//ui/vault/auth/oidc/oidc/callback`  
 ![Web App Credentials Configuration](./images/google/07-oauth2-configure-application.png)
 
 
