@@ -270,7 +270,6 @@ module "vault" {
   vault_ui               = true
   vault_image            = "mirror.gcr.io/library/vault"
   bucket_force_destroy   = true
-  vault_kms_keyring_name = "vault"
 }
 
 
