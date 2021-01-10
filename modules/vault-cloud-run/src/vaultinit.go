@@ -181,7 +181,7 @@ func VaultInit(w http.ResponseWriter, r *http.Request) {
 	default:
 		log.Printf("Vault is in an unknown state. Status code: %d", response.StatusCode)
 	}
-	fmt.Fprint(w, "OK")
+	fmt.Fprint(w, "OK.")
 }
 
 func initialize() {
