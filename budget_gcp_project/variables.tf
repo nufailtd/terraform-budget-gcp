@@ -51,8 +51,20 @@ variable "additional_roles" {
   ]
 }
 
+variable "name" {
+  description = "The name of your project."
+  type        = string
+  default     = ""
+}
+
 variable "email" {
   description = "Your email. This is a fallback in case you are unable to create an organization."
+  type        = string
+  default     = ""
+}
+
+variable "impersonate_service_account" {
+  description = "Service account for the seed project."
   type        = string
   default     = ""
 }
