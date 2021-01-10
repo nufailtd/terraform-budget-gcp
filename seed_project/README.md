@@ -35,7 +35,7 @@ Run the following commands
 
 - `terraform init` to get the plugins
 - `terraform plan` to see the infrastructure plan
-- `terraform apply` to apply the infrastructure build
+- `terraform apply --auto-approve` to apply the infrastructure build
 
 #### File structure
 This module has the following folders and files:

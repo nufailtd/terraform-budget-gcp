@@ -24,7 +24,7 @@ Run the following commands
 
 - `terraform init` to get the plugins
 - `terraform plan` to see the infrastructure plan
-- `terraform apply` to apply the infrastructure build  
+- `terraform apply --auto-approve` to apply the infrastructure build  
 Example output
 ```
 Apply complete! Resources: 56 added, 0 changed, 0 destroyed.

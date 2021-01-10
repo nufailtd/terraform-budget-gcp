@@ -291,12 +291,12 @@ Then perform the following commands:
 
 - `terraform init` to get the plugins
 - `terraform plan` to see the infrastructure plan
-- `terraform apply` to apply the infrastructure build
+- `terraform apply --auto-approve` to apply the infrastructure build
 We do this in 2 steps because of some limitations in terraform that will cause an error if certain resources do not exist.
 
 To delete the projects and stop charges accruing to your account run
 
-- `terraform destroy` to destroy the built infrastructure
+- `terraform destroy --auto-approve` to destroy the built infrastructure
 #### File structure
 The project has the following folders and files:
 ```
