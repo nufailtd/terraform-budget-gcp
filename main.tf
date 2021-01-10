@@ -265,11 +265,12 @@ module "vault" {
 
   name = "vault"
 
-  project              = var.project_id
-  location             = var.region
-  vault_ui             = true
-  vault_image          = "mirror.gcr.io/library/vault"
-  bucket_force_destroy = true
+  project                = var.project_id
+  location               = var.region
+  vault_ui               = true
+  vault_image            = "mirror.gcr.io/library/vault"
+  bucket_force_destroy   = true
+  vault_kms_keyring_name = "vault"
 }
 
 

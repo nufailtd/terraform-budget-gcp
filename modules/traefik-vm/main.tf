@@ -127,7 +127,7 @@ module "gce-container" {
 }
 
 data "template_file" "cloud-config" {
-  depends_on = [ google_secret_manager_secret_version.secret-version ]
+  depends_on = [google_secret_manager_secret_version.secret-version]
   template   = "${file("${path.module}/cloud-config.yml")}"
 
   vars = {
@@ -213,7 +213,7 @@ resource "google_compute_instance" "vm" {
       "https://www.googleapis.com/auth/trace.append",
     ]
   }
-  
+
   lifecycle {
     ignore_changes = [
       metadata
@@ -305,7 +305,7 @@ resource "google_secret_manager_secret" "secret" {
 }
 
 resource "google_secret_manager_secret_version" "secret-version" {
-  for_each    = local.credentials
+  for_each = local.credentials
 
   secret      = google_secret_manager_secret.secret[each.key].id
   secret_data = random_password.credentials[each.key].result
@@ -313,8 +313,8 @@ resource "google_secret_manager_secret_version" "secret-version" {
 
 
 resource "google_secret_manager_secret_iam_member" "member" {
-  provider  = google-beta
-  for_each  = local.credentials
+  provider = google-beta
+  for_each = local.credentials
 
   role      = "roles/secretmanager.secretAccessor"
   member    = "serviceAccount:${var.client_email}"

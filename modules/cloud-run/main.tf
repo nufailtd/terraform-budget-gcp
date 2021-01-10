@@ -18,7 +18,7 @@ provider "google-beta" {
 }
 
 locals {
-  image_tag  = "v1"
+  image_tag = "v1"
 }
 
 resource "null_resource" "ghost_image" {
@@ -27,7 +27,7 @@ resource "null_resource" "ghost_image" {
     dockerfile = filemd5("${path.module}/build/Dockerfile")
   }
   provisioner "local-exec" {
-    interpreter = [ "bash", "-c" ]
+    interpreter = ["bash", "-c"]
     command     = <<-EOT
         gcloud builds submit \
         --project ${var.project_id} \
@@ -43,7 +43,7 @@ resource "null_resource" "static_ip_image" {
     dockerfile = filemd5("${path.module}/static_ip/Dockerfile")
   }
   provisioner "local-exec" {
-    interpreter = [ "bash", "-c" ]
+    interpreter = ["bash", "-c"]
     command     = <<-EOT
         gcloud builds submit \
         --project ${var.project_id} \
@@ -55,44 +55,44 @@ resource "null_resource" "static_ip_image" {
 
 resource "google_cloud_run_service" "my-service" {
 
-  depends_on = [ null_resource.ghost_image ]
+  depends_on = [null_resource.ghost_image]
   name       = "my-service"
   location   = "us-central1"
-  
+
   template {
     spec {
       service_account_name = var.gke_serviceaccount
       containers {
-        image = null_resource.ghost_image.triggers.image      
+        image = null_resource.ghost_image.triggers.image
         ports {
           container_port = 2368
         }
-        
+
         env {
           name  = "dockerfile"
           value = null_resource.ghost_image.triggers.dockerfile
         }
-        
+
         env {
           name  = "url"
           value = "https://blog.${var.domain}"
         }
-                
+
         env {
           name  = "PROXY_SERVER"
           value = var.proxy_server
         }
-        
+
         env {
           name  = "PROXY_USER"
           value = "sm://${var.project_id}/proxy_user"
         }
-        
+
         env {
           name  = "PROXY_PASS"
           value = "sm://${var.project_id}/proxy_password"
         }
-                
+
         env {
           name  = "database__client"
           value = "mysql"
@@ -122,7 +122,7 @@ resource "google_cloud_run_service" "my-service" {
           name  = "database__connection__password"
           value = "sm://${var.project_id}/mysql_password"
         }
-        
+
       }
       timeout_seconds = 180
     }
