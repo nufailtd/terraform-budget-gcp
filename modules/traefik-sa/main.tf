@@ -117,9 +117,6 @@ resource "helm_release" "traefik" {
   name       = "traefik"
   repository = "https://helm.traefik.io/traefik"
   chart      = "traefik"
-  # version    = "9.11.0"
-  # dependency_update = true
-  # verify = false
 
   set {
     name  = "deployment.enabled"
@@ -130,6 +127,12 @@ resource "helm_release" "traefik" {
     name  = "service.enabled"
     value = "false"
   }
+
+  set {
+    name  = "ingressRoute.dashboard.enabled"
+    value = "false"
+  }
+
 }
 
 resource "kubernetes_namespace" "whoami" {
