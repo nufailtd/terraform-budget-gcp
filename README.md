@@ -264,6 +264,10 @@ oidc_config           = [
     {
       name = "authenticate.idp.clientSecret"
       value = "mysecret"
+    },
+    {
+      name  = "authenticate.idp.url"
+      value = "https://accounts.google.com"
     }
   ]
 ```
