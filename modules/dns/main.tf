@@ -55,7 +55,8 @@ resource "helm_release" "external-dns" {
 
   set {
     name  = "image.tag"
-    value = "v0.7.5"
+    value = "v0.7.4"
+    # https://github.com/kubernetes-sigs/external-dns/issues/449
   }
 
   set {
