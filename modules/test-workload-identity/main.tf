@@ -3,6 +3,10 @@ variable host {}
 variable cluster_ca_certificate {}
 variable token {}
 variable ksa {}
+variable run_post_install {
+  default     = false
+  description = "Whether to apply components that require existing resources"
+}
 
 # This file contains all the interactions with Kubernetes
 provider "kubernetes" {
@@ -13,6 +17,7 @@ provider "kubernetes" {
 }
 
 resource "kubernetes_pod" "test" {
+  count    = var.run_post_install == true ? 1 : 0
   metadata {
     name = "workload-identity-test"
   }
