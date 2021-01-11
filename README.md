@@ -114,9 +114,18 @@ sa_enable_impersonation = true
 
 Then perform the following commands on the seed_project folder:
 
-- `terraform init` to get the plugins
-- `terraform plan` to see the infrastructure plan
-- `terraform apply` to apply the infrastructure build
+- `terraform init` - to get the plugins
+```
+you@cloudshell:~/terraform-budget-gcp/seed_project$ terraform init
+```
+- `terraform plan` - to see the infrastructure plan
+```
+you@cloudshell:~/terraform-budget-gcp/seed_project$ terraform plan
+```
+ - `terraform apply --auto-approve` - to apply the infrastructure build
+```
+you@cloudshell:~/terraform-budget-gcp/seed_project$ terraform apply --auto-approve
+```
 
 </details>
 
@@ -135,9 +144,18 @@ name                        = "myproject"
 
 Then perform the following commands in the budget_gcp_project folder:
 
-- `terraform init` to get the plugins
-- `terraform plan` to see the infrastructure plan
-- `terraform apply` to apply the infrastructure build
+- `terraform init` - to get the plugins
+```
+you@cloudshell:~/terraform-budget-gcp/budget_gcp_project$ terraform init
+```
+- `terraform plan` - to see the infrastructure plan
+```
+you@cloudshell:~/terraform-budget-gcp/budget_gcp_project$ terraform plan
+```
+ - `terraform apply --auto-approve` - to apply the infrastructure build
+```
+you@cloudshell:~/terraform-budget-gcp/budget_gcp_project$ terraform apply --auto-approve
+```
 
 This operation will output the `project_id` to be used in the next steps.
 
@@ -278,27 +296,45 @@ Then perform the following commands:
 
 It is recommended to run this before performing the subsequent commands.  
 This ensures that you use the project's service account to create resources. 
-The token expires every hour so you'll have to re-issue these commands if you get an error.
+The token expires every hour so you'll have to re-issue these command if you get a **not allowed** error.  
+Simply run;  
+`. ./auth.sh [your_project_id]`;
  ```
- gcloud config set project [ YOUR_PROJECT_ID ]
- gcloud config set auth/impersonate_service_account project-service-account@[ YOUR_PROJECT_ID ].iam.gserviceaccount.com`
-export GOOGLE_OAUTH_ACCESS_TOKEN=$(gcloud auth print-access-token)
+ you@cloudshell:~/terraform-budget-gcp$ . ./auth.sh [your_project_id]
 ```
 
-- `terraform init` to get the plugins
-- `terraform plan` to see the infrastructure plan
-- `terraform apply` to apply the infrastructure build
-
+- `terraform init` - to get the plugins
+```
+you@cloudshell:~/terraform-budget-gcp$ terraform init
+```
+- `terraform plan` - to see the infrastructure plan
+```
+you@cloudshell:~/terraform-budget-gcp$ terraform plan
+```
+ - `terraform apply --auto-approve` - to apply the infrastructure build
+```
+you@cloudshell:~/terraform-budget-gcp$ terraform apply --auto-approve
+```
 **Important!!**
 Once completed modify `terraform.tfvars` and set
 ```
+# /terraform-budget-gcp/terraform.tfvars
 run_post_install = true
 ```
 Then perform the following commands:
 
-- `terraform init` to get the plugins
-- `terraform plan` to see the infrastructure plan
-- `terraform apply --auto-approve` to apply the infrastructure build
+- `terraform init` - to get the plugins
+```
+you@cloudshell:~/terraform-budget-gcp$ terraform init
+```
+- `terraform plan` - to see the infrastructure plan
+```
+you@cloudshell:~/terraform-budget-gcp$ terraform plan
+```
+ - `terraform apply --auto-approve` - to apply the infrastructure build
+```
+you@cloudshell:~/terraform-budget-gcp$ terraform apply --auto-approve
+```
 We do this in 2 steps because of some limitations in terraform that will cause an error if certain resources do not exist.
 
 To delete the projects and stop charges accruing to your account run
@@ -325,5 +361,6 @@ The project has the following folders and files:
 - /main.tf/: creates gke cluster and the rest of the modules
 - /outputs.tf: displays created resources
 - /README.md: this file
+- /auth.sh: authenticates your servicce account
 ```
 ---
