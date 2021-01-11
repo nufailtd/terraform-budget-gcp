@@ -5,6 +5,10 @@ variable gke_serviceaccount {}
 variable pomerium_sa {}
 variable proxy_server {}
 variable domain {}
+variable run_post_install {
+  default     = false
+  description = "Whether to apply components that require existing resources"
+}
 data "google_client_config" "current" {}
 
 provider "google" {
@@ -53,9 +57,13 @@ resource "null_resource" "static_ip_image" {
   }
 }
 
+locals {
+  image      = var.run_post_install == true ? null_resource.ghost_image : null_resource.static_ip_image
+  port       = var.run_post_install == true ? 2368 : 8080
+}
 resource "google_cloud_run_service" "my-service" {
 
-  depends_on = [null_resource.ghost_image]
+  depends_on = [local.image]
   name       = "my-service"
   location   = "us-central1"
 
@@ -63,14 +71,14 @@ resource "google_cloud_run_service" "my-service" {
     spec {
       service_account_name = var.gke_serviceaccount
       containers {
-        image = null_resource.ghost_image.triggers.image
+        image = local.image.triggers.image
         ports {
-          container_port = 2368
+          container_port = local.port
         }
 
         env {
           name  = "dockerfile"
-          value = null_resource.ghost_image.triggers.dockerfile
+          value = local.image.triggers.dockerfile
         }
 
         env {
