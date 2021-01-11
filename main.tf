@@ -2,19 +2,6 @@ data "google_project" "project" {
   project_id = var.project_id
 }
 
-module "kms" {
-  source              = "terraform-google-modules/kms/google"
-  project_id          = var.project_id
-  keyring             = var.project_id
-  key_rotation_period = "604800s"
-  location            = var.region
-  keys                = ["gke-secrets-key"]
-  set_owners_for      = ["gke-secrets-key"]
-  owners              = ["serviceAccount:project-service-account@${var.project_id}.iam.gserviceaccount.com"]
-  # keys can be destroyed by Terraform
-  prevent_destroy = false
-}
-
 module "gcp-network" {
   source       = "terraform-google-modules/network/google"
   version      = "~> 2.5"
