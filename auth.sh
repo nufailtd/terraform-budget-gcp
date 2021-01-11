@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -e
 
 case $1 in
 clear)
@@ -14,8 +13,8 @@ clear)
     # Impersonate the service account
     gcloud -q config set auth/impersonate_service_account $SERVICE_ACCOUNT
     # Set the token
-    export GOOGLE_OAUTH_ACCESS_TOKEN=$(gcloud auth print-access-token)
+    GOOGLE_OAUTH_ACCESS_TOKEN=$(gcloud auth print-access-token)
  else
-    echo "Run ./auth.sh [project_id]."
+    echo "Run . ./auth.sh [project_id]."
  fi
 esac
