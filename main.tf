@@ -230,6 +230,7 @@ module "cloud-run" {
   pomerium_sa        = module.pomerium-workload-identity.gcp_service_account_email
   proxy_server       = module.traefik.proxy_server
   domain             = var.domain
+  run_post_install   = var.run_post_install
 }
 
 module "pomerium" {
@@ -257,6 +258,7 @@ module "vault" {
   vault_ui               = true
   vault_image            = "mirror.gcr.io/library/vault"
   bucket_force_destroy   = true
+  run_post_install       = var.run_post_install
 }
 
 
@@ -316,4 +318,5 @@ module "test-workload-identity" {
   cluster_ca_certificate = module.gke_auth.cluster_ca_certificate
   token                  = module.gke_auth.token
   ksa                    = module.pomerium-workload-identity.k8s_service_account_name
+  run_post_install       = var.run_post_install
 }
