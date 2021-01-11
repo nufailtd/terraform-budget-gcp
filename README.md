@@ -337,9 +337,28 @@ you@cloudshell:~/terraform-budget-gcp$ terraform apply --auto-approve
 ```
 We do this in 2 steps because of some limitations in terraform that will cause an error if certain resources do not exist.
 
-To delete the projects and stop charges accruing to your account run
+If you encounter any errors, try re-running the command `terraform apply --auto-approve`.  
+It is safe to do so.
+
+
+
+To delete the projects and stop charges accruing to your account, run
 
 - `terraform destroy --auto-approve` to destroy the built infrastructure
+
+#### Sucesss 
+
+Congratulations!! You didi it.  
+Some of the services automatically deployed can be found in the following urls (substituting **your.domain** of course);  
+1. **Vault**   https://vault.gc.your.domain  
+2. **Pomerium** https://authenticate.gc.your.domain/.pomerium/  
+3. **Traefik** https://dash.gc.your.domain  
+4. **Ghost** https://blog.gc.your.domain  
+
+Check them out below
+
+![Deployments](./images/assets/sites.png)
+
 #### File structure
 The project has the following folders and files:
 ```
