@@ -1,7 +1,7 @@
 authorize:
     serviceAccount:
       annotations:
-        iam.gke.io/gcp-service-account: pomerium-authorize@vault-gc.iam.gserviceaccount.com
+        iam.gke.io/gcp-service-account: pomerium-authorize@${project_id}.iam.gserviceaccount.com
 ingress:
   hosts:
     - who.${domain}

@@ -56,6 +56,7 @@ data "template_file" "pomerium_values" {
     cloudrun_url       = var.cloudrun_url
     vault_cloudrun_url = var.vault_cloudrun_url
     email              = var.email
+    project_id         = var.project_id
   }
 }
 
