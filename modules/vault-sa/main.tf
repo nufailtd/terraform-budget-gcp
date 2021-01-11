@@ -4,6 +4,10 @@ data "google_client_config" "current" {}
 variable host {}
 variable cluster_ca_certificate {}
 variable token {}
+variable run_post_install {
+  default     = false
+  description = "Whether to apply components that require existing resources"
+}
 variable vault_cloudrun_url {
   default = "https://vault:8200"
 }
@@ -107,6 +111,7 @@ resource "helm_release" "vault-secrets-webhook" {
 
 # Use this to install Talend Vault Sidecar Injector
 resource "helm_release" "vault-sidecar-injector" {
+  depends_on = [ kubernetes_service_account.vault ]
   name       = "vault-sidecar-injector"
   repository = "https://talend.github.io/helm-charts-public/stable"
   chart      = "vault-sidecar-injector"
@@ -157,6 +162,7 @@ resource "helm_release" "vault-sidecar-injector" {
 }
 
 resource "kubernetes_deployment" "hello-secrets" {
+  count    = var.run_post_install == true ? 1 : 0
   metadata {
     name      = "hello-secrets"
     namespace = "default"
