@@ -383,3 +383,15 @@ The project has the following folders and files:
 - /auth.sh: authenticates your servicce account
 ```
 ---
+
+#### Acknowledgements
+This project builds upon some excellent work from other projects. Here are some of them;
+
+
+
+- [Sandeep Dinesh - Get 3X Capacity for your Kubernetes Cluster](https://medium.com/swlh/get-three-times-the-capacity-for-your-kubernetes-cluster-for-free-too-good-to-be-true-6f0c3032c296)
+- [Niko Kosonen - How to: Kubernetes for Cheap on Google Cloud](https://github.com/nkoson/gke-tutorial)
+- [Henrik Hoegh - Proxying Kubernetes services with Traefik](https://www.praqma.com/stories/proxying-kubernetes/)
+- [Ahmet B - Cloud Run Static IP](https://ahmet.im/blog/cloud-run-static-ip/)
+- [Seth Vargo - Vault Init](https://github.com/sethvargo/vault-init/)
+- [Mike Brancato - Vault Google Cloud Run Module](https://github.com/mbrancato/terraform-google-vault)
