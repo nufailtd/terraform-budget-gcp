@@ -35,6 +35,6 @@ output "ssh-vm" {
 
 output "proxy_server" {
   description = "Proxy Server in the format HOST:PORT"
-  value       = "${google_compute_address.instance-static-ip.address}:8181"
+  value       = "${google_compute_instance.vm.network_interface.0.access_config.0.nat_ip}:8181"
 }
 
