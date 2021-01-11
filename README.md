@@ -301,6 +301,7 @@ Simply run;
 `. ./auth.sh [your_project_id]`;
  ```
  you@cloudshell:~/terraform-budget-gcp$ . ./auth.sh [your_project_id]
+you@cloudshell:~/terraform-budget-gcp$ export GOOGLE_OAUTH_ACCESS_TOKEN=$(gcloud auth print-access-token)
 ```
 
 - `terraform init` - to get the plugins
