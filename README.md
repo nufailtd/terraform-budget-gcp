@@ -227,7 +227,7 @@ Nameservers in the format **ns-cloud-xx.googledomains.com** will be presented to
 </details>
 
 
-**Update Nameservers in Freenom**
+**Update Nameservers in Freenom (Or your Domain Name Registrar)**
 <details>
   <summary>Click to expand</summary>
 
@@ -299,9 +299,8 @@ This ensures that you use the project's service account to create resources.
 The token expires every hour so you'll have to re-issue these command if you get a **not allowed** error.  
 Simply run;  
 `. ./auth.sh [your_project_id]`;
- ```
+```
  you@cloudshell:~/terraform-budget-gcp$ . ./auth.sh [your_project_id]
-you@cloudshell:~/terraform-budget-gcp$ export GOOGLE_OAUTH_ACCESS_TOKEN=$(gcloud auth print-access-token)
 ```
 
 - `terraform init` - to get the plugins
@@ -390,9 +389,9 @@ This project builds upon some excellent work from other projects. Here are some 
 
 
 
-- [Sandeep Dinesh - Get 3X Capacity for your Kubernetes Cluster](https://medium.com/swlh/get-three-times-the-capacity-for-your-kubernetes-cluster-for-free-too-good-to-be-true-6f0c3032c296)
-- [Niko Kosonen - How to: Kubernetes for Cheap on Google Cloud](https://github.com/nkoson/gke-tutorial)
-- [Henrik Hoegh - Proxying Kubernetes services with Traefik](https://www.praqma.com/stories/proxying-kubernetes/)
-- [Ahmet B - Cloud Run Static IP](https://ahmet.im/blog/cloud-run-static-ip/)
-- [Seth Vargo - Vault Init](https://github.com/sethvargo/vault-init/)
-- [Mike Brancato - Vault Google Cloud Run Module](https://github.com/mbrancato/terraform-google-vault)
+- [Sandeep Dinesh](https://github.com/thesandlord) - [Get 3X Capacity for your Kubernetes Cluster](https://medium.com/swlh/get-three-times-the-capacity-for-your-kubernetes-cluster-for-free-too-good-to-be-true-6f0c3032c296)
+- [Niko Kosonen](https://github.com/nkoson) - [How to: Kubernetes for Cheap on Google Cloud](https://github.com/nkoson/gke-tutorial)
+- [Henrik Hoegh](https://github.com/hoeghh) - [Proxying Kubernetes services with Traefik](https://www.praqma.com/stories/proxying-kubernetes/)
+- [Ahmet B](https://github.com/ahmetb) - [Cloud Run Static IP](https://ahmet.im/blog/cloud-run-static-ip/)
+- [Seth Vargo](https://github.com/sethvargo) - [Vault Init](https://github.com/sethvargo/vault-init/)
+- [Mike Brancato](https://github.com/mbrancato) - [Vault Google Cloud Run Module](https://github.com/mbrancato/terraform-google-vault)
