@@ -1,11 +1,11 @@
-project_id            = "my-project"
+project_id            = "<my-project>"
 # Region set to us-central1 to take advantage of free tier
 region                = "us-central1"
 zones                 = ["us-central1-a"]
 cluster_name          = "kluster"
-domain                = "gc.my.dom.ain"
-domain_filter         = "my.dom.ain"
-email                 = "my@emai.il"
+domain                = "<my.dom.ain>"
+domain_filter         = "<my.dom.ain>"
+email                 = "<my@emai.il>"
 # Set run_post_install = true after first run
 run_post_install      = false
 # Select your dns provider.
@@ -16,6 +16,8 @@ dns_auth              = [
       value = "google"
      }
   ]
+/*
+# If use another DNS provider, replace dns_auth above.
 dns_auth              = [
     {
       name = "provider"
@@ -23,15 +25,15 @@ dns_auth              = [
      },
     {
       name = "cloudflare.email"
-      value = "my@email.com"
+      value = "<my@email.com>"
     },
     {
       name = "cloudflare.apiToken"
-      value = "mycloudflareapitoken"
+      value = "<mycloudflareapitoken>"
     },
     {
       name = "cloudflare.apiKey"
-      value = "mycloudflareapikey"
+      value = "<mycloudflareapikey>"
     }
   ]
 dns_auth              = [
@@ -41,7 +43,7 @@ dns_auth              = [
      },
     {
       name = "digitalocean.apiToken"
-      value = "mydigitaloceantoken"
+      value = "<mydigitaloceantoken>"
     }
   ]
 dns_auth              = [
@@ -51,9 +53,10 @@ dns_auth              = [
      },
     {
       name = "linode.apiToken"
-      value = "mylinodetoken"
+      value = "<mylinodetoken>"
     }
   ]
+*/
 # OIDC Configuration
 oidc_config           = [
     {
@@ -62,11 +65,11 @@ oidc_config           = [
      },
     {
       name = "authenticate.idp.clientID"
-      value = "[project_id]-[hash].apps.googleusercontent.com"
+      value = "<[project_id]-[hash].apps.googleusercontent.com>"
     },
     {
       name = "authenticate.idp.clientSecret"
-      value = "mysecret"
+      value = "<mysecret>"
     },
     {
     name  = "authenticate.idp.url"

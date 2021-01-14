@@ -3,6 +3,7 @@ module "project-factory" {
   version = "~> 9.2"
 
   name                              = var.name
+  random_project_id                 = var.name == "" ? true : false
   impersonate_service_account       = var.impersonate_service_account
   bucket_project                    = var.name
   billing_account                   = var.billing_account
