@@ -356,14 +356,9 @@ If you encounter any errors, try re-running the command
 `terraform apply --auto-approve`.  
 It is safe to do so.
 
-
-To delete the projects and stop charges accruing to your account, run
-
-- `terraform destroy --auto-approve` to destroy the built infrastructure
-
 #### Sucesss 
 
-Congratulations!! You didi it.  
+Congratulations!! You did it.  
 Some of the services automatically deployed can be found in the following urls (substituting **your.domain** of course);  
 1. **Vault**   https://vault.your.domain  
 2. **Pomerium** https://authenticate.your.domain/.pomerium/  
@@ -411,3 +406,9 @@ This project builds upon some excellent work from other projects. Here are some 
 - [Ahmet B](https://github.com/ahmetb) - [Cloud Run Static IP](https://ahmet.im/blog/cloud-run-static-ip/)
 - [Seth Vargo](https://github.com/sethvargo) - [Vault Init](https://github.com/sethvargo/vault-init/)
 - [Mike Brancato](https://github.com/mbrancato) - [Vault Google Cloud Run Module](https://github.com/mbrancato/terraform-google-vault)
+
+#### Clean up
+You now have GCP resources to play around with on the cheap.
+However, if you want to delete these resources and stop charges accruing to your account, run
+
+- `terraform destroy --auto-approve` to destroy the built infrastructure
