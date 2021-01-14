@@ -1,20 +1,23 @@
-
+variable build_archive {
+  description = "Whether to build archive from source or use pre-built zip"
+  default     = false
+}
 data "archive_file" "src" {
   type        = "zip"
   source_dir  = "${path.module}/src"
-  output_path = "${path.module}/generated/src.zip"
+  output_path = "${path.module}/generated/built_src.zip"
 }
 
 resource "google_storage_bucket_object" "archive" {
   name   = "${data.archive_file.src.output_md5}.zip"
   bucket = google_storage_bucket.vault.name
-  source = "${path.module}/generated/src.zip"
+  source = var.build_archive == false ? "${path.module}/generated/src.zip" : "${path.module}/generated/built_src.zip" 
 }
 
 resource "google_cloudfunctions_function" "function" {
   name        = "vault-${lower(random_id.vault.hex)}-init"
   description = "A Cloud Function to auto-initialize vault."
-  runtime     = "go111"
+  runtime     = "go113"
 
   environment_variables = {
     GCS_BUCKET_NAME   = google_storage_bucket.vault.name,
