@@ -5,3 +5,4 @@
 **/*.pem
 key*
 **/*.tfvars
+vault-config.tf
