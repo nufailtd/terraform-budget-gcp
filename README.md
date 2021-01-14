@@ -288,11 +288,11 @@ oidc_config           = [
      },
     {
       name = "authenticate.idp.clientID"
-      value = "[project_id]-[hash].apps.googleusercontent.com"
+      value = "<[project_id]-[hash].apps.googleusercontent.com>"
     },
     {
       name = "authenticate.idp.clientSecret"
-      value = "mysecret"
+      value = "<mysecret>"
     },
     {
       name  = "authenticate.idp.url"
