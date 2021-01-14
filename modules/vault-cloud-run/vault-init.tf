@@ -14,7 +14,7 @@ resource "google_storage_bucket_object" "archive" {
 resource "google_cloudfunctions_function" "function" {
   name        = "vault-${lower(random_id.vault.hex)}-init"
   description = "A Cloud Function to auto-initialize vault."
-  runtime     = "go113"
+  runtime     = "go111"
 
   environment_variables = {
     GCS_BUCKET_NAME   = google_storage_bucket.vault.name,
