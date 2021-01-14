@@ -326,22 +326,26 @@ you@cloudshell:~/terraform-budget-gcp$ terraform plan
 ```
 you@cloudshell:~/terraform-budget-gcp$ terraform apply --auto-approve
 ```
-**Important!!**
-Once completed modify `terraform.tfvars` and set
-```
-# /terraform-budget-gcp/terraform.tfvars
-run_post_install = true
-```
-Then perform the following commands:
 
-- `terraform init` - to get the plugins
+
+**Important!!**
+Once the above step completes successfully, perform the following command:
+`./post-install.sh`
+
 ```
-you@cloudshell:~/terraform-budget-gcp$ terraform init
+you@cloudshell:~/terraform-budget-gcp$ ./post-install.sh
 ```
-- `terraform plan` - to see the infrastructure plan
-```
-you@cloudshell:~/terraform-budget-gcp$ terraform plan
-```
+- This will, in order, do the following;
+  1. Set `run_post_install = true` in `terraform.tfvars`
+  2. Enable `vault-config` module in file vault-config.tf
+  3. Run `terraform init` to get plugins
+  4. Run `terraform plan` to display proposed changes  
+
+**Note:** It is possible to run these commands manually and skip the `./post-install.sh` script.  
+This script just offers convenience.
+
+
+Then run: 
  - `terraform apply --auto-approve` - to apply the infrastructure build
 ```
 you@cloudshell:~/terraform-budget-gcp$ terraform apply --auto-approve
@@ -351,7 +355,6 @@ We do this in 2 steps because of some limitations in terraform that will cause a
 If you encounter any errors, try re-running the command  
 `terraform apply --auto-approve`.  
 It is safe to do so.
-
 
 
 To delete the projects and stop charges accruing to your account, run
