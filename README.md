@@ -168,7 +168,7 @@ you@cloudshell:~/terraform-budget-gcp/budget_gcp_project$ terraform apply --auto
 
 This operation will output the `project_id` to be used in the next steps.
 
-Befor creating our resources it will be convenient to complete the following manual operations.  
+Before creating our resources it will be convenient to complete the following manual operations.  
 This will help us automate the final step.
 
 **Create an Oauth2 Client in GCP**
