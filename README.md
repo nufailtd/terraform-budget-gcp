@@ -396,6 +396,7 @@ The project has the following folders and files:
 - /outputs.tf: displays created resources
 - /README.md: this file
 - /auth.sh: authenticates your servicce account
+- /post-install.sh: creates resources that could not be created in the first run
 ```
 ---
 
