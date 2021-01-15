@@ -88,7 +88,7 @@ Provide the required information and you should be greeted with this page.
 
 ---
 
-<a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/nufailtd/terraform-budget-gcp&open_in_editor=README.md&tutorial=tutorial.md" target="_blank"><img alt="Open this project in Cloud Shell" src ="https://gstatic.com/cloudssh/images/open-btn.svg"></a>
+<a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/nufailtd/terraform-budget-gcp&open_in_editor=README.md&tutorial=cloudshell_tutorial.md" target="_blank"><img alt="Open this project in Cloud Shell" src ="https://gstatic.com/cloudssh/images/open-btn.svg"></a>
 
 ---
 
