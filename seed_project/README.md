@@ -1,8 +1,6 @@
 # Create a GCP Seed Project
 Create a seed project in an organization to manage creation of other projects using terraform.  
 
-[![Open this project in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/nufailtd/terraform-budget-gcp&open_in_editor=main.tf&cloudshell_workspace=seed_project)
-
 You will most likely **not** need to run this.  
 Use the `budget_gcp_project` instead.  
 This module requires you to have previously set up an organization through;
