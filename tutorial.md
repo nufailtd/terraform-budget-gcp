@@ -52,7 +52,7 @@ terraform plan
 ```bash
 terraform apply auto-approve
 ```
-
+<sub>**Note: If you experience an error, re-execute the above command.**</sub>
 
 You should see the following output; 
 ```
@@ -165,6 +165,7 @@ terraform plan
 ```bash
 terraform apply auto-approve
 ```
+<sub>**Note: If you experience an error, re-execute the above command.**</sub>
 
 ## Create post-install resources in project
 
@@ -179,13 +180,13 @@ We now need to create resources that depend on resources created in the previous
 ```bash
 terraform apply auto-approve
 ```
-
+<sub>**Note: If you experience an error, re-execute the above command.**</sub>
 
 ## Congratulations
 
 <walkthrough-conclusion-trophy></walkthrough-conclusion-trophy>
 
-You did it.  
+:tada: You did it!!  :tada:  
 Some of the services automatically deployed can be found in the following urls (substituting **your.domain** of course);  
 1. **Vault**   https://vault.your.domain  
 2. **Pomerium** https://authenticate.your.domain/.pomerium/  
