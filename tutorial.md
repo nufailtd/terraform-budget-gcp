@@ -73,6 +73,15 @@ service_account_id = project-service-account
 service_account_name = projects/myproject/serviceAccounts/project-service-account@myproject.iam.gserviceaccount.com
 ```
 
+## Complete some tasks
+Before we proceed to creating our `terraform.tfvars` file, we need to complete the following;
+
+1. [Create an Oauth2 Client](README.md#create-an-oauth2-client-in-gcp)
+
+2. [Create a CloudDNS Zone](README.md#create-a-zone-in-clouddns)
+
+3. [Update NameServers](README.md#update-nameservers-in-freenom-(or-your-domain-name-registrar))
+
 ## Create the terraform.tfvars file
 
 - Switch to the root directory
@@ -129,6 +138,7 @@ oidc_config           = [
     }
   ]
 ```
+
 
 ## Create resources in project
 Now that we have created the project, we are now ready to create our resources;  

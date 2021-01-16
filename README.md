@@ -185,7 +185,8 @@ This operation will output the `project_id` to be used in the next steps.
 Before creating our resources it will be convenient to complete the following manual operations.  
 This will help us automate the final step.
 
-**Create an Oauth2 Client in GCP**
+<a name="create-oauth2-client"></a>
+#### **Create an Oauth2 Client in GCP**
 <details>
   <summary>Click to expand</summary>
   
@@ -226,8 +227,8 @@ Download the client_secret file to be used in a later configuration.
 </details>
 
 
-
-**Create a zone in CloudDNS**
+<a name="create-zone"></a>
+#### **Create a zone in CloudDNS**
 <details>
   <summary>Click to expand</summary>
 
@@ -247,8 +248,8 @@ Nameservers in the format **ns-cloud-xx.googledomains.com** will be presented to
 
 </details>
 
-
-**Update Nameservers in Freenom (Or your Domain Name Registrar)**
+<a name="update-nameservers"></a>
+#### **Update Nameservers in Freenom (Or your Domain Name Registrar)**
 <details>
   <summary>Click to expand</summary>
 
