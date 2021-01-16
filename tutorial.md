@@ -80,7 +80,7 @@ Before we proceed to creating our `terraform.tfvars` file, we need to complete t
 
 2. [Create a CloudDNS Zone](README.md#create-a-zone-in-clouddns)
 
-3. [Update NameServers](README.md#update-nameservers-in-freenom-(or-your-domain-name-registrar))
+3. [Update NameServers](README.md#update-nameservers-in-freenom-or-your-domain-name-registrar)
 
 ## Create the terraform.tfvars file
 
