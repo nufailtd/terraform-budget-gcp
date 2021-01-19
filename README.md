@@ -91,7 +91,11 @@ Provide the required information and you should be greeted with this page.
 <a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/nufailtd/terraform-budget-gcp&open_in_editor=README.md&cloudshell_tutorial=tutorial.md" target="_blank"><img alt="Open this project in Cloud Shell" src ="https://gstatic.com/cloudssh/images/open-btn.svg"></a>
 
 You only need to click on this button once.  
-If you already did this, [**click here**](https://ssh.cloud.google.com/cloudshell/editor?cloudshell_tutorial=cloudshell_open/terraform-budget-gcp/tutorial.md).  
+If you already did this, [**click here**](https://ssh.cloud.google.com/cloudshell/editor?cloudshell_tutorial=~/cloudshell_open/terraform-budget-gcp/tutorial.md).  
+Then run below to resume the tutorial
+```
+cloudshell launch-tutorial -d ~/cloudshell_open/terraform-budget-gcp/tutorial.md
+```
 
 ---
 
