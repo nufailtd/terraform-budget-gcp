@@ -195,26 +195,33 @@ This will help us automate the final step.
   <summary>Click to expand</summary>
   
 1. Log in to your Google Cloud account and go to the [APIs & services](https://console.developers.google.com/projectselector/apis/credentials).
-![Select Project](./images/google/01-oauth2-select-project.png)
- Navigate to **Consent** using the left-hand menu and select **External**
+![Select Project](./images/google/01-oauth2-select-project.png)  
+ Select the project you created above.  
+ Navigate to **OAuth consent screen** using the left-hand menu and select **External**
 ![Consent Screen](./images/google/02-oauth2-consent-screen.png)
 
 2. Configure your **Oauth Consent Screen**  
-Fill in "Application Name"  
+Under **App information** Fill in **App Name**  
+Select your email in **User support email**  
+Enter your email in **Developer contact information**  
+Click **Save & Continue**  
 Proceed to next page and under scopes make sure you select the following scopes **only**  
 `openid, profile, email`  
+Use the *Filter table* on the right to search for the scopes and check each of the scopes then click **Update**
 ![OAuth Consent Scopes ](./images/google/03-oauth2-add-scopes.png)
-Add your email as a test user and complete.
+Click **Save & Continue**  
+Under **Test Users** Add your email as a test user and complete.
 ![OAuth Consent Add Users](./images/google/04-oauth2-add-users.png)
+Click **Save & Continue**  
 A successful configuration should like below
 ![OAuth Consent Summary](./images/google/05-oauth2-summary.png)
 
 3. Create New Credentials.  
-On the **Credentials** page, click **Create credentials** and choose **OAuth [Client ID]**.
+On the **Credentials** page, click **Create credentials** and select **OAuth client ID**.
 ![Create New Credentials](./images/google/06-oauth2-create-credentials.png)
 
 4. Configure Client ID  
-On the **Create [Client ID]** page, select **Web application**.   
+On the **Create OAuth client ID** page, select **Web application**.   
 Under **Authorized redirect URIs**
 set the following parameters substituting `domain.com` for domain you created above  
 `https://authenticate.domain.com/oauth2/callback`  
