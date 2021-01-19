@@ -5,7 +5,7 @@ zones                 = ["us-central1-a"]
 cluster_name          = "kluster"
 domain                = "<my.dom.ain>"
 domain_filter         = "<my.dom.ain>"
-email                 = "<my@emai.il>"
+email                 = "<my@ema.il>"
 # Set run_post_install = true after first run
 run_post_install      = false
 # Select your dns provider.
@@ -15,6 +15,25 @@ dns_auth              = [
       name = "provider"
       value = "google"
      }
+  ]
+# OIDC Configuration
+oidc_config           = [
+    {
+      name = "authenticate.idp.provider"
+      value = "google"
+     },
+    {
+      name = "authenticate.idp.clientID"
+      value = "<[project_id]-[hash].apps.googleusercontent.com>"
+    },
+    {
+      name = "authenticate.idp.clientSecret"
+      value = "<mysecret>"
+    },
+    {
+    name  = "authenticate.idp.url"
+    value = "https://accounts.google.com"
+    }
   ]
 /*
 # If use another DNS provider, replace dns_auth above.
@@ -57,22 +76,3 @@ dns_auth              = [
     }
   ]
 */
-# OIDC Configuration
-oidc_config           = [
-    {
-      name = "authenticate.idp.provider"
-      value = "google"
-     },
-    {
-      name = "authenticate.idp.clientID"
-      value = "<[project_id]-[hash].apps.googleusercontent.com>"
-    },
-    {
-      name = "authenticate.idp.clientSecret"
-      value = "<mysecret>"
-    },
-    {
-    name  = "authenticate.idp.url"
-    value = "https://accounts.google.com"
-    }
-  ]
