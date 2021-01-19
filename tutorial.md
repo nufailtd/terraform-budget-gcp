@@ -96,7 +96,7 @@ cp tfvars.example terraform.tfvars
 
 
 <walkthrough-editor-open-file
-    filePath="terraform.tfvars">
+    filePath="cloudshell_open/terraform-budget-gcp/terraform.tfvars">
     Open the **terraform.tfvars** file for editing
     </walkthrough-editor-open-file>  
 
