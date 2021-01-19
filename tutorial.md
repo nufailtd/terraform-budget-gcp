@@ -50,7 +50,7 @@ terraform plan
 
 - Create resource(s)
 ```bash
-terraform apply auto-approve
+terraform apply --auto-approve
 ```
 <sub>**Note: If you experience an error, re-execute the above command.**</sub>
 
@@ -163,7 +163,7 @@ terraform plan
 
 - Create resource(s)
 ```bash
-terraform apply auto-approve
+terraform apply --auto-approve
 ```
 <sub>**Note: If you experience an error, re-execute the above command.**</sub>
 
@@ -178,7 +178,7 @@ We now need to create resources that depend on resources created in the previous
 
 - Then create resource(s)
 ```bash
-terraform apply auto-approve
+terraform apply --auto-approve
 ```
 <sub>**Note: If you experience an error, re-execute the above command.**</sub>
 
