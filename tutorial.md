@@ -76,11 +76,11 @@ service_account_name = projects/myproject/serviceAccounts/project-service-accoun
 ## Complete some tasks
 Before we proceed to creating our `terraform.tfvars` file, we need to complete the following;
 
-1. [Create an Oauth2 Client](README.md#create-an-oauth2-client-in-gcp)
+1. [Create an Oauth2 Client](https://github.com/nufailtd/terraform-budget-gcp/blob/main/README.md#create-an-oauth2-client-in-gcp)
 
-2. [Create a CloudDNS Zone](README.md#create-a-zone-in-clouddns)
+2. [Create a CloudDNS Zone](https://github.com/nufailtd/terraform-budget-gcp/blob/main/README.md#create-a-zone-in-clouddns)
 
-3. [Update NameServers](README.md#update-nameservers-in-freenom-or-your-domain-name-registrar)
+3. [Update NameServers](https://github.com/nufailtd/terraform-budget-gcp/blob/main/README.md#update-nameservers-in-freenom-or-your-domain-name-registrar)
 
 ## Create the terraform.tfvars file
 
