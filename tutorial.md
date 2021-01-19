@@ -14,7 +14,7 @@ For the following steps, click the icon **>_**  to copy the command in cloudshel
 
 - Switch to the `budget_gcp_project` directory
 ```bash
-cd budget_gcp_project
+cd ~/cloudshell_open/terraform-budget-gcp/budget_gcp_project
 ```
 
 ## Create the terraform.tfvars file
@@ -86,7 +86,7 @@ Before we proceed to creating our `terraform.tfvars` file, we need to complete t
 
 - Switch to the root directory
 ```bash
-cd ..
+cd ~/cloudshell_open/terraform-budget-gcp
 ```
 
 - Create a file `terraform.tfvars` by running the following command;
