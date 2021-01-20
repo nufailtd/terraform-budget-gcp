@@ -37,6 +37,19 @@ resource "kubernetes_manifest" "clusterissuer_letsencrypt_test" {
               }
             }
           },
+          {
+            "dns01" = {
+              "clouddns" = {
+                "project" = var.project_id
+              }
+            },
+            "selector" = {
+                "dnsNames" = [
+                  "${var.domain}",
+                  "*.${var.domain}",
+                ]
+            }
+          },
         ]
       }
     }
@@ -66,6 +79,19 @@ resource "kubernetes_manifest" "clusterissuer_letsencrypt_live" {
                 "class" = "traefik-cert-manager"
               }
             }
+          },          
+          {
+            "dns01" = {
+              "clouddns" = {
+                "project" = "${var.project_id}"
+              }
+            },
+            "selector" = {
+                "dnsNames" = [
+                  "${var.domain}",
+                  "*.${var.domain}",
+                ]
+            }
           },
         ]
       }
@@ -94,6 +120,31 @@ resource "kubernetes_manifest" "certificate_self_signed_cert" {
         "name" = "self-signed"
       }
       "secretName" = "self-signed-cert"
+    }
+  }
+}
+
+resource "kubernetes_manifest" "certificate_test_wildcard_cert" {
+  count    = var.run_post_install == true ? 1 : 0
+  provider = kubernetes-alpha
+  manifest = {
+    "apiVersion" = "cert-manager.io/v1alpha2"
+    "kind"       = "Certificate"
+    "metadata" = {
+      "name"      = "test-wildcard-cert"
+      "namespace" = "default"
+    }
+    "spec" = {
+      "commonName" = "${var.domain}"
+      "dnsNames" = [
+        "${var.domain}",
+        "*.${var.domain}",
+      ]
+      "issuerRef" = {
+        "kind" = "ClusterIssuer"
+        "name" = "letsencrypt-test"
+      }
+      "secretName" = "test-wildcard-cert"
     }
   }
 }
