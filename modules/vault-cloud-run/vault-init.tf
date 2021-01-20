@@ -73,15 +73,20 @@ resource "google_cloud_scheduler_job" "job" {
   
 }
 */
+  
+resource "time_sleep" "wait_60_seconds" {
+  depends_on = [google_cloudfunctions_function_iam_member.invoker]
+
+  create_duration = "60s"
+}
 
 data "google_service_account_id_token" "oidc" {
-  depends_on             = [google_cloudfunctions_function_iam_member.invoker]
+  depends_on             = [time_sleep.wait_60_seconds]
   target_audience        = google_cloudfunctions_function.function.https_trigger_url
   target_service_account = google_service_account.vault.email
 }
 
 data "http" "vaultinit" {
-  depends_on = [google_cloudfunctions_function_iam_member.invoker]
   url        = google_cloudfunctions_function.function.https_trigger_url
   request_headers = {
     Authorization = "Bearer ${data.google_service_account_id_token.oidc.id_token}"
