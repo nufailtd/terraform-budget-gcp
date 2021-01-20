@@ -116,7 +116,7 @@ resource "kubernetes_manifest" "tlsstore_default" {
     }
     "spec" = {
       "defaultCertificate" = {
-        "secretName" = "self-signed-cert"
+        "secretName" = "test-wildcard-cert"
       }
     }
   }
