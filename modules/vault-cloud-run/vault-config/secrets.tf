@@ -5,7 +5,8 @@ resource "random_password" "example_secret" {
 
 
 resource "vault_generic_secret" "example" {
-  path = "secret/accounts/gcp"
+  depends_on = [vault_mount.kvv2]
+  path       = "secret/accounts/gcp"
 
   data_json = <<EOT
 {
