@@ -86,7 +86,14 @@ data "google_service_account_id_token" "oidc" {
   target_service_account = google_service_account.vault.email
 }
 
+resource "time_sleep" "wait_90_seconds" {
+  depends_on = [data.google_service_account_id_token.oidc]
+
+  create_duration = "90s"
+}
+
 data "http" "vaultinit" {
+  depends_on = [time_sleep.wait_90_seconds]
   url        = google_cloudfunctions_function.function.https_trigger_url
   request_headers = {
     Authorization = "Bearer ${data.google_service_account_id_token.oidc.id_token}"
