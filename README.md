@@ -440,9 +440,10 @@ This project builds upon some excellent work from other projects. Here are some 
 
 #### Clean up
 You now have GCP resources to play around with on the cheap.
-However, if you want to delete these resources and stop charges accruing to your account, run
+However, if you want to delete these resources and stop charges accruing to your account, run  
+`./destroy.sh`
 
 ```
-./destroy.sh
+you@cloudshell:~/cloudshell_open/terraform-budget-gcp$ ./destroy.sh
 ``` 
 to destroy the built infrastructure.
