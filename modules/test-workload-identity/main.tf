@@ -3,6 +3,10 @@ variable host {}
 variable cluster_ca_certificate {}
 variable token {}
 variable ksa {}
+variable ksa_namespace {
+  default     = "default"
+  description = "Kubernetes service account namespace"
+}
 variable run_post_install {
   default     = false
   description = "Whether to apply components that require existing resources"
@@ -19,7 +23,8 @@ provider "kubernetes" {
 resource "kubernetes_pod" "test" {
   count    = var.run_post_install == true ? 1 : 0
   metadata {
-    name = "workload-identity-test"
+    name      = "workload-identity-test"
+    namespace = var.ksa_namespace
   }
 
   spec {
