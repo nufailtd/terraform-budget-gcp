@@ -55,7 +55,7 @@ resource "kubernetes_cluster_role" "traefik-container-vm" {
 
   rule {
     api_groups = ["traefik.containo.us"]
-    resources  = ["middlewares", "ingressroutes", "traefikservices", "ingressroutetcps", "ingressrouteudps", "tlsoptions", "tlsstores"]
+    resources  = ["middlewares", "ingressroutes", "traefikservices", "ingressroutetcps", "ingressrouteudps", "tlsoptions", "tlsstores", "serverstransports"]
     verbs      = ["get", "list", "watch"]
   }
 }
