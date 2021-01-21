@@ -330,5 +330,6 @@ module "test-workload-identity" {
   cluster_ca_certificate = module.gke_auth.cluster_ca_certificate
   token                  = module.gke_auth.token
   ksa                    = module.pomerium-workload-identity.k8s_service_account_name
+  ksa_namespace          = module.cert-manager-workload-identity.k8s_service_account_namespace
   run_post_install       = var.run_post_install
 }
