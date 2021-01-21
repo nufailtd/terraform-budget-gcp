@@ -310,6 +310,18 @@ module "external-dns-workload-identity" {
   cluster_name        = var.cluster_name
   location            = module.gke.location
 }
+  
+module "cert-manager-workload-identity" {
+  source              = "./modules/workload-identity"
+  use_existing_k8s_sa = true
+  name                = "cert-manager"
+  namespace           = "cert-manager"
+  project_id          = var.project_id
+  roles               = ["roles/dns.admin"]
+  cluster_name        = var.cluster_name
+  location            = module.gke.location
+}
+
 
 module "test-workload-identity" {
   source = "./modules/test-workload-identity"
