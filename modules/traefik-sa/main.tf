@@ -132,11 +132,6 @@ resource "helm_release" "traefik" {
     name  = "ingressRoute.dashboard.enabled"
     value = "false"
   }
-  
-  set {
-    name  = "image.tag"
-    value = "v2.4.0"
-  }
 
 }
 
