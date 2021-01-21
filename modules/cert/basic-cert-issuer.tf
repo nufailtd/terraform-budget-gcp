@@ -149,6 +149,30 @@ resource "kubernetes_manifest" "certificate_test_wildcard_cert" {
   }
 }
 
+resource "kubernetes_manifest" "certificate_live_wildcard_cert" {
+  count    = var.run_post_install == true ? 1 : 0
+  provider = kubernetes-alpha
+  manifest = {
+    "apiVersion" = "cert-manager.io/v1alpha2"
+    "kind"       = "Certificate"
+    "metadata" = {
+      "name"      = "live-wildcard-cert"
+      "namespace" = "default"
+    }
+    "spec" = {
+      "commonName" = "${var.domain}"
+      "dnsNames" = [
+        "${var.domain}",
+        "*.${var.domain}",
+      ]
+      "issuerRef" = {
+        "kind" = "ClusterIssuer"
+        "name" = "letsencrypt-live"
+      }
+      "secretName" = "live-wildcard-cert"
+    }
+  }
+}
 
 # Test certificates
 
