@@ -31,7 +31,7 @@ module "gce-container" {
   cos_image_name = var.cos_image_name
 
   container = {
-    image = "traefik:v2.3.5"
+    image = "traefik:v2.4.0"
     /*
     command = [
       "tail"
