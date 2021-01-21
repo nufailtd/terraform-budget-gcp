@@ -44,10 +44,10 @@ resource "kubernetes_manifest" "clusterissuer_letsencrypt_test" {
               }
             },
             "selector" = {
-                "dnsNames" = [
-                  "${var.domain}",
-                  "*.${var.domain}",
-                ]
+              "dnsNames" = [
+                "${var.domain}",
+                "*.${var.domain}",
+              ]
             }
           },
         ]
@@ -79,7 +79,7 @@ resource "kubernetes_manifest" "clusterissuer_letsencrypt_live" {
                 "class" = "traefik-cert-manager"
               }
             }
-          },          
+          },
           {
             "dns01" = {
               "clouddns" = {
@@ -87,10 +87,10 @@ resource "kubernetes_manifest" "clusterissuer_letsencrypt_live" {
               }
             },
             "selector" = {
-                "dnsNames" = [
-                  "${var.domain}",
-                  "*.${var.domain}",
-                ]
+              "dnsNames" = [
+                "${var.domain}",
+                "*.${var.domain}",
+              ]
             }
           },
         ]

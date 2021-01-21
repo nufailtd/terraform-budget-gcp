@@ -21,7 +21,7 @@ provider "kubernetes" {
 }
 
 resource "kubernetes_pod" "test" {
-  count    = var.run_post_install == true ? 1 : 0
+  count = var.run_post_install == true ? 1 : 0
   metadata {
     name      = "workload-identity-test"
     namespace = var.ksa_namespace

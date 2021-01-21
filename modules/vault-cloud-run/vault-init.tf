@@ -11,7 +11,7 @@ data "archive_file" "src" {
 resource "google_storage_bucket_object" "archive" {
   name   = "${data.archive_file.src.output_md5}.zip"
   bucket = google_storage_bucket.vault.name
-  source = var.build_archive == false ? "${path.module}/generated/src.zip" : "${path.module}/generated/built_src.zip" 
+  source = var.build_archive == false ? "${path.module}/generated/src.zip" : "${path.module}/generated/built_src.zip"
 }
 
 resource "google_cloudfunctions_function" "function" {
@@ -73,7 +73,7 @@ resource "google_cloud_scheduler_job" "job" {
   
 }
 */
-  
+
 resource "time_sleep" "wait_60_seconds" {
   depends_on = [google_cloudfunctions_function_iam_member.invoker]
 

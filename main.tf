@@ -253,12 +253,12 @@ module "vault" {
 
   name = "vault"
 
-  project                = var.project_id
-  location               = module.gke.region
-  vault_ui               = true
-  vault_image            = "mirror.gcr.io/library/vault"
-  bucket_force_destroy   = true
-  run_post_install       = var.run_post_install
+  project              = var.project_id
+  location             = module.gke.region
+  vault_ui             = true
+  vault_image          = "mirror.gcr.io/library/vault"
+  bucket_force_destroy = true
+  run_post_install     = var.run_post_install
 }
 
 
@@ -310,7 +310,7 @@ module "external-dns-workload-identity" {
   cluster_name        = var.cluster_name
   location            = module.gke.location
 }
-  
+
 module "cert-manager-workload-identity" {
   source              = "./modules/workload-identity"
   use_existing_k8s_sa = true

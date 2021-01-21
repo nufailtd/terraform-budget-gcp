@@ -58,8 +58,8 @@ resource "null_resource" "static_ip_image" {
 }
 
 locals {
-  image      = var.run_post_install == true ? null_resource.ghost_image : null_resource.static_ip_image
-  port       = var.run_post_install == true ? 2368 : 8080
+  image = var.run_post_install == true ? null_resource.ghost_image : null_resource.static_ip_image
+  port  = var.run_post_install == true ? 2368 : 8080
 }
 resource "google_cloud_run_service" "my-service" {
 

@@ -88,7 +88,7 @@ resource "helm_release" "cert-manager" {
     // https://github.com/hashicorp/terraform-provider-helm/issues/92#issuecomment-407807183
     value = "{${join(",", var.extraArgs)}}"
   }
-  
+
   set {
     name  = "serviceAccount.annotations.iam\\.gke\\.io/gcp-service-account"
     value = "cert-manager@${var.project_id}.iam.gserviceaccount.com"
