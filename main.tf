@@ -254,7 +254,7 @@ module "vault" {
   name = "vault"
 
   project                = var.project_id
-  location               = var.region
+  location               = module.gke.region
   vault_ui               = true
   vault_image            = "mirror.gcr.io/library/vault"
   bucket_force_destroy   = true
