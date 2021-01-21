@@ -91,7 +91,7 @@ resource "helm_release" "cert-manager" {
   
   set {
     name  = "serviceAccount.annotations.iam\\.gke\\.io/gcp-service-account"
-    value = "external-dns@${var.project_id}.iam.gserviceaccount.com"
+    value = "cert-manager@${var.project_id}.iam.gserviceaccount.com"
     type  = "string"
   }
 
