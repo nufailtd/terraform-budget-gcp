@@ -422,6 +422,7 @@ The project has the following folders and files:
 - /README.md: this file
 - /auth.sh: authenticates your servicce account
 - /post-install.sh: creates resources that could not be created in the first run
+- /destroy.sh: destroys resources
 ```
 ---
 
@@ -441,4 +442,7 @@ This project builds upon some excellent work from other projects. Here are some 
 You now have GCP resources to play around with on the cheap.
 However, if you want to delete these resources and stop charges accruing to your account, run
 
-- `terraform destroy --auto-approve` to destroy the built infrastructure
+```
+./destroy.sh
+``` 
+to destroy the built infrastructure.
