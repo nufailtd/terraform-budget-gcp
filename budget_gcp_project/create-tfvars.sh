@@ -28,8 +28,8 @@ status)
     
     # Set terraform version
     mkdir -p ~/bin && \
-    wget -nc https://releases.hashicorp.com/terraform/0.12.31/terraform_0.12.31_linux_amd64.zip && \
-    unzip -o -d ~/bin terraform_0.12.31_linux_amd64.zip && \
+    wget -nc https://releases.hashicorp.com/terraform/0.12.31/terraform_0.12.31_linux_amd64.zip -P ~ && \
+    unzip -o -d ~/bin ~/terraform_0.12.31_linux_amd64.zip && \
     echo "alias terraform='~/bin/terraform'" > ~/.bash_aliases && \
     source ~/.bashrc
     
