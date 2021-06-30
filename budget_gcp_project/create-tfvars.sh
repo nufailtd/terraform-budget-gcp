@@ -14,7 +14,7 @@ status)
  ;;
 *)
     # Get the Billing Account
-    BILLING_ACCOUNT=$(gcloud beta billing accounts list --format='value(ACCOUNT_ID)')
+    BILLING_ACCOUNT=$(gcloud beta billing accounts list --format='value(ACCOUNT_ID)' --limit=1)
     # Get the logged in user account
     EMAIL=$(gcloud auth list --filter=status:ACTIVE --filter="-account ~ serviceaccount"  --format='value(ACCOUNT)')
     
@@ -29,7 +29,7 @@ status)
     # Set terraform version
     mkdir -p ~/bin && \
     wget -nc https://releases.hashicorp.com/terraform/0.12.31/terraform_0.12.31_linux_amd64.zip && \
-    unzip terraform_0.12.31_linux_amd64.zip -d ~/bin && \
+    unzip -o -d ~/bin terraform_0.12.31_linux_amd64.zip && \
     echo "alias terraform='~/bin/terraform'" > ~/.bash_aliases && \
     source ~/.bashrc
     
