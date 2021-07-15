@@ -19,7 +19,7 @@ clear)
     if [[ $CLOUD_SHELL == true ]]; then
       # Error: dial tcp ... connect: cannot assign requested address
       # https://github.com/hashicorp/terraform-provider-google/issues/6782
-      APIS="googleapis.com www.googleapis.com storage.googleapis.com iam.googleapis.com container.googleapis.com cloudresourcemanager.googleapis.com"
+      APIS="googleapis.com www.googleapis.com storage.googleapis.com iam.googleapis.com container.googleapis.com cloudresourcemanager.googleapis.com cloudkms.googleapis.com"
           
       sed '/##\[USER/{:a;N;/END\]##/!ba};//d' /etc/hosts | sudo tee /etc/hosts.temp
       echo '##[USER_HOSTS_START]##' | sudo tee -a /etc/hosts.temp
